@@ -29,7 +29,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -44,16 +44,16 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-        </div>
-        <div className="hidden md:flex items-center gap-8">
-          {/* links... */}
           <ThemeToggle />
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+          <ThemeToggle />
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -65,7 +65,12 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-gray-600 dark:text-gray-300 hover:text-emerald-500"
+                className={cn(
+                  "text-base font-medium transition-colors hover:text-emerald-500",
+                  pathname === link.href
+                    ? "text-emerald-500"
+                    : "text-gray-600 dark:text-gray-300",
+                )}
               >
                 {link.name}
               </Link>

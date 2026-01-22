@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { ThemeProvider } from "@/components/shared/ThemeProvider"; // Perlu setup next-themes
+import { ThemeProvider } from "@/components/shared/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <main className="flex-grow pt-20">{children}</main>
+          <main className="grow pt-20">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

@@ -14,7 +14,7 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="space-y-8">
             <h3 className="text-2xl font-semibold">
-              Let's talk about your project
+              Let&apos;s talk about your project
             </h3>
             <div className="space-y-4">
               <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300">

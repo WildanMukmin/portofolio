@@ -8,7 +8,7 @@ const projects = [
     title: "E-Commerce Dashboard",
     desc: "A comprehensive dashboard for managing products, orders, and analytics.",
     tags: ["Next.js", "Tailwind", "Prisma"],
-    image: "https://via.placeholder.com/600x400", // Ganti dengan gambar asli
+    image: "/anu.jpg",
     github: "#",
     live: "#",
   },
@@ -16,11 +16,18 @@ const projects = [
     title: "SaaS Landing Page",
     desc: "High-conversion landing page with modern animations and SEO optimization.",
     tags: ["React", "Framer Motion", "Stripe"],
-    image: "https://via.placeholder.com/600x400",
+    image: "/anu.jpg",
     github: "#",
     live: "#",
   },
-  // Tambahkan project lain...
+  {
+    title: "Portfolio Website",
+    desc: "Clean and modern portfolio website with dark mode support.",
+    tags: ["Next.js", "TypeScript", "Tailwind"],
+    image: "/anu.jpg",
+    github: "#",
+    live: "#",
+  },
 ];
 
 export default function Portfolio() {
@@ -39,9 +46,10 @@ export default function Portfolio() {
             delay={idx * 0.1}
             className="group bg-gray-50 dark:bg-gray-900 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800"
           >
-            <div className="relative h-48 w-full overflow-hidden">
-              {/* Gunakan Image dari next/image di produksi */}
-              <img
+            <div className="relative h-48 w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
+              <Image
+                width={500}
+                height={500}
                 src={project.image}
                 alt={project.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
