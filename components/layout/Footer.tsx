@@ -1,35 +1,56 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+"use client";
+
 import Link from "next/link";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-black py-8 mt-12">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div className="text-center md:text-left">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            © {new Date().getFullYear()} DevPortfolio. Built with Next.js &
-            Tailwind.
+    <footer className="border-t border-border bg-background/50 backdrop-blur-md">
+      <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-8 md:h-20 md:flex-row md:py-0 px-4">
+        <div className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
+          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+            Built by{" "}
+            <Link
+              href="/"
+              className="font-medium underline underline-offset-4 text-foreground"
+            >
+              Wildan
+            </Link>
+            . The source code is available on{" "}
+            <a
+              href="https://github.com/wildanmukmin"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4 text-foreground"
+            >
+              GitHub
+            </a>
+            .
           </p>
         </div>
 
-        <div className="flex gap-6">
+        {/* Social Icons */}
+        <div className="flex gap-4">
           <Link
-            href="#"
-            className="text-gray-500 hover:text-emerald-500 transition-colors"
+            href="https://github.com"
+            target="_blank"
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <Github size={20} />
+            <Github className="h-5 w-5" />
           </Link>
           <Link
-            href="#"
-            className="text-gray-500 hover:text-emerald-500 transition-colors"
+            href="https://linkedin.com"
+            target="_blank"
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <Linkedin size={20} />
+            <Linkedin className="h-5 w-5" />
           </Link>
           <Link
-            href="#"
-            className="text-gray-500 hover:text-emerald-500 transition-colors"
+            href="https://twitter.com"
+            target="_blank"
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
-            <Twitter size={20} />
+            <Twitter className="h-5 w-5" />
           </Link>
         </div>
       </div>

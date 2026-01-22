@@ -1,71 +1,128 @@
+"use client";
+
 import Section from "@/components/shared/Section";
-import Button from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { Mail, MapPin, Phone } from "lucide-react";
 
-export default function Contact() {
+export default function ContactPage() {
   return (
-    <div className="container mx-auto px-6 py-12">
-      <Section className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-12">
-          Get In <span className="text-emerald-500">Touch</span>
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-12 bg-gray-50 dark:bg-gray-900 p-8 rounded-3xl border border-gray-100 dark:border-gray-800">
+    <div className="container mx-auto px-4 pt-24 pb-16">
+      <Section>
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Info */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold">
-              Let&apos;s talk about your project
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300">
-                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-lg">
-                  <Mail size={20} />
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight mb-6">
+              Get in <span className="text-primary">Touch</span>
+            </h1>
+            <p className="text-muted-foreground text-lg mb-8">
+              Apakah Anda memiliki ide proyek yang menarik? Atau hanya ingin
+              menyapa? Jangan ragu untuk menghubungi saya. Saya selalu terbuka
+              untuk diskusi baru.
+            </p>
+
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Mail className="h-6 w-6" />
                 </div>
-                <span>hello@yourdomain.com</span>
+                <div>
+                  <h3 className="font-semibold">Email</h3>
+                  <p className="text-muted-foreground text-sm">
+                    wildan@example.com
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300">
-                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-lg">
-                  <Phone size={20} />
+
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Phone className="h-6 w-6" />
                 </div>
-                <span>+62 812 3456 7890</span>
+                <div>
+                  <h3 className="font-semibold">Phone</h3>
+                  <p className="text-muted-foreground text-sm">
+                    +62 812 3456 7890
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300">
-                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-lg">
-                  <MapPin size={20} />
+
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <MapPin className="h-6 w-6" />
                 </div>
-                <span>Jakarta, Indonesia</span>
+                <div>
+                  <h3 className="font-semibold">Location</h3>
+                  <p className="text-muted-foreground text-sm">Indonesia</p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Form */}
-          <form className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Name</label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
-                placeholder="Your name"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
-              <input
-                type="email"
-                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
-                placeholder="your@email.com"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Message</label>
-              <textarea
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
-                placeholder="Tell me about your project..."
-              />
-            </div>
-            <Button className="w-full">Send Message</Button>
-          </form>
+          {/* Simple Form UI */}
+          <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
+            <form className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label
+                    htmlFor="name"
+                    className="text-sm font-medium leading-none"
+                  >
+                    Nama
+                  </label>
+                  <input
+                    id="name"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Nama Anda"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium leading-none"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    placeholder="nama@contoh.com"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="subject"
+                  className="text-sm font-medium leading-none"
+                >
+                  Subjek
+                </label>
+                <input
+                  id="subject"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  placeholder="Tentang Project X"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="text-sm font-medium leading-none"
+                >
+                  Pesan
+                </label>
+                <textarea
+                  id="message"
+                  className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  placeholder="Ceritakan detail kebutuhan Anda..."
+                />
+              </div>
+
+              <Button type="button" className="w-full">
+                Kirim Pesan
+              </Button>
+            </form>
+          </div>
         </div>
       </Section>
     </div>

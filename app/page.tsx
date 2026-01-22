@@ -1,7 +1,7 @@
 import Section from "@/components/shared/Section";
-import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 export default function Home() {
   return (

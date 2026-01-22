@@ -1,53 +1,82 @@
+"use client";
+
 import Section from "@/components/shared/Section";
-import Button from "@/components/ui/Button";
-import { Download } from "lucide-react";
+import { motion } from "framer-motion";
+import { Code2, Layout, Server } from "lucide-react";
 
-export default function AboutMe() {
+// Data Skill Dummy
+const skills = [
+  {
+    name: "Frontend",
+    icon: Layout,
+    items: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+  },
+  {
+    name: "Backend",
+    icon: Server,
+    items: ["Node.js", "Express", "PostgreSQL", "Prisma"],
+  },
+  { name: "Tools", icon: Code2, items: ["Git", "VS Code", "Docker", "Figma"] },
+];
+
+export default function AboutPage() {
   return (
-    <div className="container mx-auto px-6 py-12 space-y-20">
-      {/* Bio Section */}
-      <Section className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <h2 className="text-4xl font-bold">
-            About <span className="text-emerald-500">Me</span>
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            I&apos;m a passionate Fullstack Developer with a knack for creating
-            seamless digital experiences. My journey began with a curiosity for
-            how things work on the web, which led me to master the MERN stack
-            and Next.js ecosystem.
-          </p>
-          <Button variant="outline" className="gap-2">
-            <Download size={18} /> Download CV
-          </Button>
-        </div>
-        {/* Placeholder for Profile Image */}
-        <div className="h-80 bg-gray-200 dark:bg-gray-800 rounded-2xl flex items-center justify-center">
-          <span className="text-gray-400">Your Image Here</span>
-        </div>
-      </Section>
-
-      {/* Skills Section */}
+    <div className="container mx-auto px-4 pt-24 pb-16">
       <Section>
-        <h3 className="text-2xl font-bold mb-8">Technical Skills</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            "React",
-            "Next.js",
-            "TypeScript",
-            "Node.js",
-            "Tailwind CSS",
-            "PostgreSQL",
-            "GraphQL",
-            "Docker",
-          ].map((skill, idx) => (
-            <div
-              key={idx}
-              className="p-4 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl text-center font-semibold hover:border-emerald-500 transition-colors shadow-sm"
-            >
-              {skill}
+        <div className="grid gap-12 lg:grid-cols-2">
+          {/* Bagian Kiri: Bio */}
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight mb-6">
+              About <span className="text-primary">Me</span>
+            </h1>
+            <div className="prose prose-lg dark:prose-invert text-muted-foreground">
+              <p className="mb-4">
+                Halo! Saya Wildan, seorang pengembang perangkat lunak yang
+                bersemangat menciptakan pengalaman web yang intuitif dan
+                dinamis.
+              </p>
+              <p className="mb-4">
+                Perjalanan coding saya dimulai ketika saya menemukan betapa
+                serunya mengubah baris kode menjadi sesuatu yang bisa digunakan
+                orang banyak. Saat ini, saya fokus mendalami ekosistem React dan
+                Next.js.
+              </p>
+              <p>
+                Ketika tidak sedang coding, Anda mungkin menemukan saya sedang
+                membaca buku teknologi terbaru atau bereksperimen dengan desain
+                UI/UX.
+              </p>
             </div>
-          ))}
+          </div>
+
+          {/* Bagian Kanan: Skills Grid */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-semibold mb-4">Tech Stack</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {skills.map((skill, index) => (
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="rounded-xl border border-border bg-card p-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                      <skill.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-semibold">{skill.name}</h3>
+                  </div>
+                  <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                    {skill.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
     </div>

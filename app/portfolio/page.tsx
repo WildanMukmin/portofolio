@@ -1,95 +1,118 @@
+"use client";
+
 import Section from "@/components/shared/Section";
+import { Button } from "@/components/ui/Button";
+import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-// Data dummy untuk project
+// Data Project Dummy
 const projects = [
   {
-    title: "E-Commerce Dashboard",
-    desc: "A comprehensive dashboard for managing products, orders, and analytics.",
-    tags: ["Next.js", "Tailwind", "Prisma"],
-    image: "/anu.jpg",
-    github: "#",
-    live: "#",
+    title: "Project E-Commerce",
+    description:
+      "Platform belanja online dengan fitur keranjang dan payment gateway.",
+    tags: ["Next.js", "Stripe", "Zustand"],
+    image: "/anu.jpg", // Ganti dengan gambar aslimu nanti
+    demo: "#",
+    repo: "#",
   },
   {
-    title: "SaaS Landing Page",
-    desc: "High-conversion landing page with modern animations and SEO optimization.",
-    tags: ["React", "Framer Motion", "Stripe"],
+    title: "Dashboard Admin",
+    description:
+      "Sistem manajemen data internal dengan grafik analitik realtime.",
+    tags: ["React", "Recharts", "Tailwind"],
     image: "/anu.jpg",
-    github: "#",
-    live: "#",
+    demo: "#",
+    repo: "#",
   },
   {
-    title: "Portfolio Website",
-    desc: "Clean and modern portfolio website with dark mode support.",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
+    title: "Personal Blog",
+    description:
+      "Blog pribadi menggunakan MDX dan SSG untuk performa maksimal.",
+    tags: ["Next.js", "MDX", "Contentlayer"],
     image: "/anu.jpg",
-    github: "#",
-    live: "#",
+    demo: "#",
+    repo: "#",
   },
 ];
 
-export default function Portfolio() {
+export default function PortfolioPage() {
   return (
-    <div className="container mx-auto px-6 py-12">
+    <div className="container mx-auto px-4 pt-24 pb-16">
       <Section>
-        <h2 className="text-4xl font-bold mb-12 text-center">
-          Featured <span className="text-emerald-500">Projects</span>
-        </h2>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">
+            My <span className="text-primary">Portfolio</span>
+          </h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Berikut adalah beberapa proyek pilihan yang telah saya kerjakan.
+            Mencakup aplikasi web full-stack, desain UI, dan eksperimen open
+            source.
+          </p>
+        </div>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all hover:shadow-lg hover:border-primary/50"
+            >
+              {/* Image Container */}
+              <div className="relative aspect-video overflow-hidden bg-muted">
+                {/* Ganti src dengan gambar project asli */}
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                  {project.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center rounded-md bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-3">
+                  <Button variant="outline" size="sm" className="w-full">
+                    <Link href={project.repo} target="_blank">
+                      <Github className="mr-2 h-4 w-4" /> Code
+                    </Link>
+                  </Button>
+                  <Button size="sm" className="w-full">
+                    <Link href={project.demo} target="_blank">
+                      <ExternalLink className="mr-2 h-4 w-4" /> Demo
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </Section>
-
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, idx) => (
-          <Section
-            key={idx}
-            delay={idx * 0.1}
-            className="group bg-gray-50 dark:bg-gray-900 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800"
-          >
-            <div className="relative h-48 w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
-              <Image
-                width={500}
-                height={500}
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-
-            <div className="p-6">
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 rounded-full font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">
-                {project.desc}
-              </p>
-
-              <div className="flex gap-4">
-                <a
-                  href={project.github}
-                  className="flex items-center gap-1 text-sm font-semibold hover:text-emerald-500 transition-colors"
-                >
-                  <Github size={16} /> Code
-                </a>
-                <a
-                  href={project.live}
-                  className="flex items-center gap-1 text-sm font-semibold hover:text-emerald-500 transition-colors"
-                >
-                  <ExternalLink size={16} /> Live Demo
-                </a>
-              </div>
-            </div>
-          </Section>
-        ))}
-      </div>
     </div>
   );
 }
