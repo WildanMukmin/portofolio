@@ -1,67 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Mode - Zinc based */
+  /* Light Mode - Clean & Bright */
   --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  --foreground: 20 14% 10%;
   
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  --card: 0 0% 98%;
+  --card-foreground: 20 14% 10%;
   
   --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
+  --popover-foreground: 20 14% 10%;
   
-  --primary: 158 64% 52%; /* Emerald kamu */
-  --primary-foreground: 144 70% 5%;
+  --primary: 24 95% 53%; /* Vibrant Orange */
+  --primary-foreground: 0 0% 100%;
   
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
+  --secondary: 20 14% 95%;
+  --secondary-foreground: 20 14% 10%;
   
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
+  --muted: 20 14% 96%;
+  --muted-foreground: 20 5% 45%;
   
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
+  --accent: 24 95% 53%;
+  --accent-foreground: 0 0% 100%;
   
-  --destructive: 0 84.2% 60.2%;
+  --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 158 64% 52%;
+  --border: 20 6% 90%;
+  --input: 20 6% 90%;
+  --ring: 24 95% 53%;
   
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 .dark {
-  /* Dark Mode - Deep Slate/Zinc */
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+  /* Dark Mode - Deep & Vibrant */
+  --background: 0 0% 7%;
+  --foreground: 0 0% 95%;
   
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 95%;
   
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 95%;
   
-  --primary: 158 64% 52%;
-  --primary-foreground: 144 70% 5%;
+  --primary: 24 95% 53%; /* Same vibrant orange */
+  --primary-foreground: 0 0% 100%;
   
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 95%;
   
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 60%;
   
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
+  --accent: 24 95% 53%;
+  --accent-foreground: 0 0% 100%;
   
-  --destructive: 0 62.8% 30.6%;
+  --destructive: 0 62% 50%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 158 64% 52%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 24 95% 53%;
 }
 
 @theme inline {
@@ -103,4 +103,44 @@
 
 body {
   @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
+}
+
+/* Glow effect untuk dark mode */
+.dark .glow-effect {
+  box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+}
+
+/* Texture overlay untuk background */
+.texture-overlay {
+  position: relative;
+}
+
+.texture-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.dark .texture-overlay::before {
+  opacity: 0.02;
 }
