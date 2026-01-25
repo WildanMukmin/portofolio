@@ -1,67 +1,69 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Mode - Clean & Bright */
-  --background: 0 0% 100%;
-  --foreground: 20 14% 10%;
+  /* Light Mode - Clean & Tech */
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
   
-  --card: 0 0% 98%;
-  --card-foreground: 20 14% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
   
   --popover: 0 0% 100%;
-  --popover-foreground: 20 14% 10%;
+  --popover-foreground: 222 47% 11%;
   
-  --primary: 24 95% 53%; /* Vibrant Orange */
-  --primary-foreground: 0 0% 100%;
+  /* Modern Electric Blue */
+  --primary: 217 91% 60%; 
+  --primary-foreground: 210 40% 98%;
   
-  --secondary: 20 14% 95%;
-  --secondary-foreground: 20 14% 10%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
   
-  --muted: 20 14% 96%;
-  --muted-foreground: 20 5% 45%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
   
-  --accent: 24 95% 53%;
-  --accent-foreground: 0 0% 100%;
+  --accent: 217 91% 60%;
+  --accent-foreground: 210 40% 98%;
   
   --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive-foreground: 210 40% 98%;
 
-  --border: 20 6% 90%;
-  --input: 20 6% 90%;
-  --ring: 24 95% 53%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 217 91% 60%;
   
   --radius: 0.75rem;
 }
 
 .dark {
-  /* Dark Mode - Deep & Vibrant */
-  --background: 0 0% 7%;
-  --foreground: 0 0% 95%;
+  /* Dark Mode - Deep Space / Cyberpunk */
+  --background: 222 47% 11%; /* Dark Navy Blue */
+  --foreground: 210 40% 98%;
   
-  --card: 0 0% 10%;
-  --card-foreground: 0 0% 95%;
+  --card: 217 33% 17%;
+  --card-foreground: 210 40% 98%;
   
-  --popover: 0 0% 10%;
-  --popover-foreground: 0 0% 95%;
+  --popover: 222 47% 11%;
+  --popover-foreground: 210 40% 98%;
   
-  --primary: 24 95% 53%; /* Same vibrant orange */
-  --primary-foreground: 0 0% 100%;
+  /* Neon Cyan for Dark Mode */
+  --primary: 190 100% 50%; 
+  --primary-foreground: 222 47% 11%;
   
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 0 0% 95%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
   
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 60%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
   
-  --accent: 24 95% 53%;
-  --accent-foreground: 0 0% 100%;
+  --accent: 190 100% 50%;
+  --accent-foreground: 222 47% 11%;
   
   --destructive: 0 62% 50%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive-foreground: 210 40% 98%;
 
-  --border: 0 0% 20%;
-  --input: 0 0% 20%;
-  --ring: 24 95% 53%;
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --ring: 190 100% 50%;
 }
 
 @theme inline {
@@ -96,9 +98,6 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 body {
@@ -122,25 +121,32 @@ body {
   @apply bg-primary;
 }
 
-/* Glow effect untuk dark mode */
-.dark .glow-effect {
-  box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+/* Modern Grid Background */
+.cyber-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
 }
 
-/* Texture overlay untuk background */
-.texture-overlay {
-  position: relative;
+.dark .cyber-grid {
+  background-image: linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px);
 }
 
-.texture-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.05;
-  pointer-events: none;
+/* Glow Effect */
+.glow-text {
+  text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
 }
 
-.dark .texture-overlay::before {
-  opacity: 0.02;
+.dark .glow-box {
+  box-shadow: 0 0 25px hsl(var(--primary) / 0.15);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }

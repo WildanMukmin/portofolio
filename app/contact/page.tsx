@@ -2,142 +2,110 @@
 
 import Section from "@/components/shared/Section";
 import { Button } from "@/components/ui/Button";
-import { Mail, MapPin, Phone } from "lucide-react";
 import { motion } from "framer-motion";
+import { Mail, MapPin, Send } from "lucide-react";
 
-export default function ContactPage() {
+export default function Contact() {
   return (
-    <div className="container mx-auto px-6 pt-32 pb-16 texture-overlay">
-      <Section>
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Contact Info */}
+    <div className="min-h-screen pt-20 flex items-center">
+      <Section className="w-full">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            className="space-y-8"
           >
-            <span className="inline-block text-primary font-bold tracking-[0.2em] text-sm mb-4 uppercase">
-              Contact
-            </span>
-            <h1 className="text-5xl md:text-7xl font-black mb-8">
-              Get in <span className="text-primary">Touch</span>
-            </h1>
-            <p className="text-muted-foreground text-lg mb-12 leading-relaxed">
-              Apakah Anda memiliki ide proyek yang menarik? Atau hanya ingin
-              menyapa? Jangan ragu untuk menghubungi saya. Saya selalu terbuka
-              untuk diskusi baru.
-            </p>
+            <div>
+              <h1 className="text-5xl md:text-7xl font-black mb-6">
+                Let&apos;s <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+                  Connect.
+                </span>
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-md border-l-4 border-primary pl-6">
+                Punya ide proyek gila atau sekadar ingin berdiskusi tentang
+                teknologi masa depan? Sinyal saya selalu aktif.
+              </p>
+            </div>
 
             <div className="space-y-6">
-              {[
-                {
-                  icon: Mail,
-                  title: "Email",
-                  value: "wildan@example.com",
-                },
-                {
-                  icon: Phone,
-                  title: "Phone",
-                  value: "+62 812 3456 7890",
-                },
-                {
-                  icon: MapPin,
-                  title: "Location",
-                  value: "Indonesia",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + index * 0.1 }}
-                  className="flex items-center gap-6 p-4 rounded-2xl border-2 border-border bg-card hover:border-primary/50 transition-all group"
-                >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <item.icon className="h-6 w-6" />
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-transparent hover:border-primary/30 transition-all">
+                <div className="p-3 bg-primary/10 rounded-full text-primary">
+                  <Mail size={24} />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground uppercase tracking-wider font-bold">
+                    Email Uplink
                   </div>
-                  <div>
-                    <h3 className="font-black uppercase tracking-wider text-sm mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground">{item.value}</p>
+                  <a
+                    href="mailto:contact@wildan.dev"
+                    className="text-lg font-medium hover:text-primary transition-colors"
+                  >
+                    contact@wildan.dev
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-transparent hover:border-primary/30 transition-all">
+                <div className="p-3 bg-primary/10 rounded-full text-primary">
+                  <MapPin size={24} />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground uppercase tracking-wider font-bold">
+                    Base Location
                   </div>
-                </motion.div>
-              ))}
+                  <div className="text-lg font-medium">Indonesia, Earth</div>
+                </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Form */}
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="rounded-2xl border-2 border-border bg-card p-8 shadow-xl"
+            transition={{ delay: 0.2 }}
+            className="bg-card/50 backdrop-blur-md p-8 rounded-3xl border border-primary/20 shadow-2xl shadow-primary/5"
           >
-            <h2 className="text-2xl font-black mb-6 uppercase tracking-wider">
-              Send Message
-            </h2>
             <form className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-bold uppercase tracking-wider"
-                  >
-                    Nama
+                  <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+                    Identity
                   </label>
                   <input
-                    id="name"
-                    className="flex h-12 w-full rounded-xl border-2 border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary transition-all"
+                    type="text"
                     placeholder="Nama Anda"
+                    className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-bold uppercase tracking-wider"
-                  >
-                    Email
+                  <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+                    Frequency
                   </label>
                   <input
-                    id="email"
                     type="email"
-                    className="flex h-12 w-full rounded-xl border-2 border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary transition-all"
-                    placeholder="nama@contoh.com"
+                    placeholder="Email Anda"
+                    className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="subject"
-                  className="text-sm font-bold uppercase tracking-wider"
-                >
-                  Subjek
-                </label>
-                <input
-                  id="subject"
-                  className="flex h-12 w-full rounded-xl border-2 border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary transition-all"
-                  placeholder="Tentang Project X"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-bold uppercase tracking-wider"
-                >
-                  Pesan
+                <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+                  Transmission Data
                 </label>
                 <textarea
-                  id="message"
-                  className="flex min-h-[150px] w-full rounded-xl border-2 border-input bg-background px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary transition-all resize-none"
-                  placeholder="Ceritakan detail kebutuhan Anda..."
+                  rows={4}
+                  placeholder="Tulis pesan Anda di sini..."
+                  className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
                 />
               </div>
 
-              <Button type="button" className="w-full" size="lg">
-                Kirim Pesan
+              <Button size="lg" className="w-full group">
+                <Send className="mr-2 w-4 h-4 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+                Transmit Message
               </Button>
             </form>
           </motion.div>
