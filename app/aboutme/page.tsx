@@ -32,12 +32,14 @@ export default function AboutPage() {
             <h1 className="text-4xl md:text-5xl font-black mb-6">
               Wildan <span className="text-primary">Mukmin</span>
             </h1>
+            <h2 className="text-xl md:text-2xl mb-6">
+              Fullstack Web Developer
+            </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               Seorang pengembang perangkat lunak yang berfokus pada menciptakan
               antarmuka digital yang intuitif dan berkinerja tinggi. Saya
               memadukan kreativitas desain dengan logika pemrograman yang kuat.
             </p>
-
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-secondary/30 border border-border">

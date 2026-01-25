@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Wildan's Portfolio",
-  description: "Modern Portfolio built with Next.js and Tailwind CSS",
+  description: "Welcome to Wildan's Portfolio",
 };
 
 export default function RootLayout({
@@ -24,11 +24,10 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark" // Saya sarankan default dark untuk tema cyber
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          {/* Background Global */}
           <div className="fixed inset-0 cyber-grid pointer-events-none z-[-1]" />
           <div className="fixed inset-0 pointer-events-none z-[-1]">
             <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] animate-pulse" />

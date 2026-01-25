@@ -12,10 +12,12 @@ export default function Footer() {
           <div>
             <Link
               href="/"
-              className="text-2xl font-black tracking-tight inline-block mb-4"
+              className="text-lg lg:text-2xl font-black tracking-tight inline-block mb-4"
             >
-              <span className="text-foreground">Wildan</span>
-              <span className="text-primary">.dev</span>
+              <span className="text-foreground group-hover:text-primary transition-colors">
+                Wildan Mukmin |{" "}
+              </span>
+              <span className="text-primary">Fullstack Web Developer</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Building modern web experiences with passion and precision.

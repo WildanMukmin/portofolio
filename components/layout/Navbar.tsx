@@ -23,11 +23,14 @@ export default function Navbar() {
     <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-black tracking-tight group">
+        <Link
+          href="/"
+          className="text-lg lg:text-2xl font-black tracking-tight group"
+        >
           <span className="text-foreground group-hover:text-primary transition-colors">
-            Wildan
+            Wildan Mukmin |{" "}
           </span>
-          <span className="text-primary">.dev</span>
+          <span className="text-primary">Fullstack Web Developer</span>
         </Link>
 
         {/* Desktop Navigation */}

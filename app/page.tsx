@@ -20,32 +20,21 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    // Container utama tidak perlu lagi mengatur background grid/blobs
-    // Cukup pastikan relative agar z-index konten bekerja dengan baik
     <div className="relative overflow-hidden selection:bg-primary selection:text-black">
       <div className="container mx-auto px-6 flex flex-col justify-center relative z-10">
-        {/* --- HERO SECTION --- */}
-        <Section className="max-w-4xl space-y-8 pt-32 md:pt-48 min-h-[90vh] flex flex-col justify-center">
+        <Section className="max-w-4xl space-y-8 pt-20 md:pt-16 min-h-[90vh] flex flex-col justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              System Online
-            </div>
-
             <h1 className="text-5xl md:text-8xl font-black leading-[0.9] mb-6 tracking-tight">
-              Architecting{" "}
+              Building{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600 glow-text">
                 Digital
               </span>
               <br />
-              <span className="text-foreground">Realities.</span>
+              <span className="text-foreground">Experiences That Matter.</span>
             </h1>
           </motion.div>
 
@@ -53,11 +42,14 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed border-l-2 border-primary/50 pl-6"
+            className="
+      text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed
+      border-l-2 border-primary/40 pl-6
+    "
           >
-            Fullstack Developer yang mengubah baris kode menjadi pengalaman
-            digital yang imersif. Menggabungkan estetika futuristik dengan
-            performa tingkat tinggi.
+            Fullstack Developer yang ngerangkai ide jadi produk digital nyata.
+            Fokus ke clean code, performa ngebut, dan UI yang enak dipakai bukan
+            cuma kelihatan keren.
           </motion.p>
 
           <motion.div
@@ -69,16 +61,17 @@ export default function Home() {
             <Link href="/portfolio">
               <Button size="lg" className="group shadow-primary/25 shadow-lg">
                 Explore Projects
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
+
             <Link href="/contact">
               <Button
                 variant="outline"
                 size="lg"
                 className="backdrop-blur-sm bg-background/50"
               >
-                Initiate Contact
+                Let&apos;s Collaborate
               </Button>
             </Link>
           </motion.div>
@@ -90,23 +83,42 @@ export default function Home() {
             className="flex gap-6 pt-8"
           >
             {[Github, Linkedin, Twitter].map((Icon, i) => (
-              <a
+              <Link
                 key={i}
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full bg-secondary/50 hover:bg-primary/20 hover:text-primary transition-all duration-300 hover:scale-110 border border-transparent hover:border-primary/30"
+                className="
+          p-3 rounded-full
+          bg-secondary/50
+          hover:bg-primary/20
+          hover:text-primary
+          transition-all duration-300
+          hover:scale-110
+          border border-transparent
+          hover:border-primary/30
+        "
               >
                 <Icon className="h-5 w-5" />
-              </a>
+              </Link>
             ))}
           </motion.div>
         </Section>
 
-        {/* --- TECH MARQUEE SECTION --- */}
-        <div className="w-full py-12 border-y border-white/5 bg-black/20 backdrop-blur-sm mb-24 overflow-hidden -mx-6 md:-mx-0">
+        <div
+          className="
+    w-full py-12 mb-24 overflow-hidden
+    border-y
+    bg-muted/40
+    border-border/40
+
+    dark:bg-black/20
+    dark:border-white/5
+    backdrop-blur-sm
+  "
+        >
           <div className="relative flex overflow-x-hidden group">
-            <div className="animate-marquee whitespace-nowrap flex gap-16 items-center">
+            <div className="animate-marquee whitespace-nowrap flex gap-16 items-center h-16">
               {[
                 "REACT",
                 "NEXT.JS",
@@ -114,6 +126,7 @@ export default function Home() {
                 "TAILWIND",
                 "NODE.JS",
                 "POSTGRESQL",
+                "MYSQL",
                 "DOCKER",
                 "AWS",
                 "GRAPHQL",
@@ -124,6 +137,7 @@ export default function Home() {
                 "TAILWIND",
                 "NODE.JS",
                 "POSTGRESQL",
+                "MYSQL",
                 "DOCKER",
                 "AWS",
                 "GRAPHQL",
@@ -131,7 +145,19 @@ export default function Home() {
               ].map((tech, i) => (
                 <span
                   key={i}
-                  className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white/20 to-white/5 uppercase tracking-widest hover:text-primary transition-colors cursor-default"
+                  className="
+            text-2xl font-black uppercase tracking-widest cursor-default
+            text-foreground/40
+            transition-all duration-300
+
+            hover:text-primary hover:scale-110
+
+            dark:text-transparent
+            dark:bg-clip-text
+            dark:bg-gradient-to-b
+            dark:from-white/30
+            dark:to-white/5
+          "
                 >
                   {tech}
                 </span>
@@ -155,6 +181,7 @@ export default function Home() {
                 description:
                   "Dibangun di atas ekosistem React & Next.js terbaru.",
                 icon: Cpu,
+                highlight: true,
               },
               {
                 title: "Global Scale",
