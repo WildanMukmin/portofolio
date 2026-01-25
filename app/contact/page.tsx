@@ -3,7 +3,7 @@
 import Section from "@/components/shared/Section";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, Send, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageSquare, Send } from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -23,10 +23,10 @@ export default function ContactPage() {
                 <MessageSquare size={14} />
                 Transmission
               </div>
-              <h1 className="text-4xl font-black mb-4">Let's Connect</h1>
+              <h1 className="text-4xl font-black mb-4">Let&apos;s Connect</h1>
               <p className="text-muted-foreground">
-                Tertarik berkolaborasi atau punya pertanyaan seputar proyek?
-                Kirimkan pesan melalui formulir ini atau email langsung.
+                Interested in collaborating or have questions about a project?
+                Send me a message via this form or email directly.
               </p>
             </motion.div>
 

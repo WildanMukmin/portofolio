@@ -24,7 +24,7 @@ export default function Home() {
       <div className="container mx-auto px-6 flex flex-col justify-center relative z-10">
         <Section className="max-w-4xl space-y-8 pt-20 md:pt-16 min-h-[90vh] flex flex-col justify-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
@@ -47,9 +47,9 @@ export default function Home() {
       border-l-2 border-primary/40 pl-6
     "
           >
-            Fullstack Developer yang ngerangkai ide jadi produk digital nyata.
-            Fokus ke clean code, performa ngebut, dan UI yang enak dipakai bukan
-            cuma kelihatan keren.
+            Fullstack Developer turning ideas into tangible digital products.
+            Focused on clean code, blazing-fast performance, and intuitive UI
+            that works as good as it looks.
           </motion.p>
 
           <motion.div
@@ -173,25 +173,24 @@ export default function Home() {
               {
                 title: "High Velocity",
                 description:
-                  "Optimasi performa ekstrim untuk waktu muat instan.",
+                  "Extreme performance optimization for instant load times.",
                 icon: Zap,
               },
               {
                 title: "Next-Gen Tech",
-                description:
-                  "Dibangun di atas ekosistem React & Next.js terbaru.",
+                description: "Built upon the latest React & Next.js ecosystem.",
                 icon: Cpu,
                 highlight: true,
               },
               {
                 title: "Global Scale",
                 description:
-                  "Arsitektur siap skala untuk audiens internasional.",
+                  "Scalable architecture ready for international audiences.",
                 icon: Globe,
               },
               {
                 title: "Clean Syntax",
-                description: "Kode yang mudah dipelihara dan didokumentasikan.",
+                description: "Maintainable and well-documented code base.",
                 icon: Code2,
                 highlight: true,
               },
@@ -309,19 +308,19 @@ export default function Home() {
                 step: "01",
                 title: "Discovery",
                 icon: Terminal,
-                desc: "Analisis kebutuhan sistem dan arsitektur data.",
+                desc: "System requirement analysis and data architecture planning.",
               },
               {
                 step: "02",
                 title: "Development",
                 icon: Code2,
-                desc: "Penulisan kode bersih dengan stack teknologi modern.",
+                desc: "Clean code writing with modern technology stack.",
               },
               {
                 step: "03",
                 title: "Deployment",
                 icon: Layers,
-                desc: "Peluncuran ke production dengan optimasi CI/CD.",
+                desc: "Production launch with CI/CD pipelines optimization.",
               },
             ].map((item, i) => (
               <motion.div

@@ -36,9 +36,9 @@ export default function AboutPage() {
               Fullstack Web Developer
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              Seorang pengembang perangkat lunak yang berfokus pada menciptakan
-              antarmuka digital yang intuitif dan berkinerja tinggi. Saya
-              memadukan kreativitas desain dengan logika pemrograman yang kuat.
+              A software developer focused on creating intuitive and
+              high-performance digital interfaces. I combine design creativity
+              with strong programming logic.
             </p>
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
@@ -73,13 +73,13 @@ export default function AboutPage() {
                   role: "Senior Frontend Developer",
                   company: "Tech Company A",
                   period: "2023 - Present",
-                  desc: "Memimpin pengembangan UI untuk aplikasi SaaS skala enterprise.",
+                  desc: "Leading UI development for enterprise-scale SaaS applications.",
                 },
                 {
                   role: "Web Developer",
                   company: "Digital Agency B",
                   period: "2021 - 2023",
-                  desc: "Membangun website responsif untuk berbagai klien internasional.",
+                  desc: "Built responsive websites for various international clients.",
                 },
               ].map((job, i) => (
                 <div key={i} className="relative">
@@ -102,12 +102,12 @@ export default function AboutPage() {
             <div className="space-y-8 border-l-2 border-border pl-8 ml-3 mb-12">
               <div className="relative">
                 <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background bg-blue-500" />
-                <h3 className="text-xl font-bold">Teknik Informatika</h3>
+                <h3 className="text-xl font-bold">Computer Science</h3>
                 <p className="text-sm text-primary font-mono mb-2">
-                  Universitas XYZ | 2017 - 2021
+                  XYZ University | 2017 - 2021
                 </p>
                 <p className="text-muted-foreground">
-                  Fokus pada Rekayasa Perangkat Lunak dan AI.
+                  Focused on Software Engineering and AI.
                 </p>
               </div>
             </div>

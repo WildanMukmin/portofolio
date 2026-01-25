@@ -13,7 +13,7 @@ const projects = [
     title: "E-Commerce Dashboard",
     category: "Web Application",
     description:
-      "Dashboard admin lengkap dengan analitik real-time dan manajemen stok.",
+      "Complete admin dashboard with real-time analytics and inventory management.",
     tech: ["Next.js", "Tailwind", "Prisma"],
     link: "#",
     github: "#",
@@ -23,7 +23,7 @@ const projects = [
     title: "Travel Booking App",
     category: "Mobile First Web",
     description:
-      "Platform pemesanan tiket perjalanan dengan integrasi payment gateway.",
+      "Travel ticket booking platform with secure payment gateway integration.",
     tech: ["React", "Redux", "Node.js"],
     link: "#",
     github: "#",
@@ -32,7 +32,8 @@ const projects = [
     id: "03",
     title: "AI Chat Interface",
     category: "Experiment",
-    description: "Antarmuka chat modern yang terhubung dengan OpenAI API.",
+    description:
+      "Modern chat interface connected to OpenAI API with streaming support.",
     tech: ["TypeScript", "OpenAI API", "Vercel SDK"],
     link: "#",
     github: "#",
@@ -58,8 +59,8 @@ export default function PortfolioPage() {
             </span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            Kumpulan proyek terpilih yang menunjukkan kemampuan teknis dan
-            pemecahan masalah.
+            A collection of selected projects demonstrating technical abilities
+            and problem-solving skills.
           </p>
         </motion.div>
       </Section>
