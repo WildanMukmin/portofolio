@@ -13,7 +13,6 @@ import {
   Zap,
   ExternalLink,
   Layers,
-  Database,
   Terminal,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -21,16 +20,9 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden selection:bg-primary selection:text-black">
-      {/* Futuristik Background Grid */}
-      <div className="absolute inset-0 cyber-grid pointer-events-none z-0" />
-
-      {/* Decorative Gradient Blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse delay-1000" />
-      </div>
-
+    // Container utama tidak perlu lagi mengatur background grid/blobs
+    // Cukup pastikan relative agar z-index konten bekerja dengan baik
+    <div className="relative overflow-hidden selection:bg-primary selection:text-black">
       <div className="container mx-auto px-6 flex flex-col justify-center relative z-10">
         {/* --- HERO SECTION --- */}
         <Section className="max-w-4xl space-y-8 pt-32 md:pt-48 min-h-[90vh] flex flex-col justify-center">
@@ -112,7 +104,7 @@ export default function Home() {
         </Section>
 
         {/* --- TECH MARQUEE SECTION --- */}
-        <div className="w-full py-12 border-y border-white/5 bg-black/20 backdrop-blur-sm mb-24 overflow-hidden">
+        <div className="w-full py-12 border-y border-white/5 bg-black/20 backdrop-blur-sm mb-24 overflow-hidden -mx-6 md:-mx-0">
           <div className="relative flex overflow-x-hidden group">
             <div className="animate-marquee whitespace-nowrap flex gap-16 items-center">
               {[
@@ -145,7 +137,6 @@ export default function Home() {
                 </span>
               ))}
             </div>
-            {/* Duplicate for infinite effect (needs custom CSS animation or just long enough array) */}
           </div>
         </div>
 
@@ -314,7 +305,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative flex flex-col items-center text-center"
               >
-                <div className="w-24 h-24 rounded-2xl bg-card border border-primary/30 flex items-center justify-center mb-6 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.3)] z-10">
+                <div className="w-24 h-24 rounded-2xl bg-card border border-primary/30 flex items-center justify-center mb-6 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.3)] z-10 bg-background">
                   <item.icon className="w-10 h-10 text-primary" />
                 </div>
                 <div className="text-6xl font-black text-secondary absolute -top-4 -right-4 -z-10 opacity-50 select-none">

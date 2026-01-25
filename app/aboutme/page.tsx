@@ -2,97 +2,135 @@
 
 import Section from "@/components/shared/Section";
 import { motion } from "framer-motion";
-import { Code2, Cpu, Database, Globe, Layers, Zap } from "lucide-react";
+import { User, Code, Briefcase, GraduationCap, Cpu } from "lucide-react";
 
-export default function AboutMe() {
+export default function AboutPage() {
   return (
-    <div className="min-h-screen pt-20 pb-10">
-      <Section className="space-y-12">
-        {/* Header / Identity Block */}
-        <motion.div 
+    <div className="container mx-auto px-6 py-12">
+      <Section className="mb-16">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative p-8 rounded-2xl border border-primary/20 bg-card/30 backdrop-blur-md overflow-hidden"
+          transition={{ duration: 0.5 }}
+          className="grid md:grid-cols-2 gap-12 items-center"
         >
-          <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-primary/50 rounded-tl-2xl" />
-          <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-primary/50 rounded-br-2xl" />
-          
-          <div className="grid md:grid-cols-[200px_1fr] gap-8 items-center">
-             {/* Profile Avatar Placeholder / Hologram Effect */}
-            <div className="w-full aspect-square rounded-xl bg-gradient-to-br from-primary/20 to-blue-900/20 border border-primary/30 flex items-center justify-center relative overflow-hidden group">
-               <div className="absolute inset-0 bg-[url('/anu.jpg')] bg-cover bg-center opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500" />
-               <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+          {/* Kolom Kiri: Foto / Avatar Placeholder */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+            <div className="relative aspect-square rounded-2xl bg-card border border-border overflow-hidden flex items-center justify-center">
+              {/* Ganti dengan <Image /> asli nanti */}
+              <User className="w-32 h-32 text-primary/50" />
             </div>
+          </div>
 
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-primary text-xs font-mono tracking-widest uppercase">
-                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                System Status: Online
+          {/* Kolom Kanan: Bio */}
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
+              <User size={14} />
+              Personal File
+            </div>
+            <h1 className="text-4xl md:text-5xl font-black mb-6">
+              Wildan <span className="text-primary">Mukmin</span>
+            </h1>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              Seorang pengembang perangkat lunak yang berfokus pada menciptakan
+              antarmuka digital yang intuitif dan berkinerja tinggi. Saya
+              memadukan kreativitas desain dengan logika pemrograman yang kuat.
+            </p>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl bg-secondary/30 border border-border">
+                <div className="text-3xl font-black text-primary">3+</div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  Years Exp.
+                </div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter">
-                Wildan <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Mukmin</span>
-              </h1>
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
-                Seorang pengembang Fullstack yang beroperasi di persimpangan antara desain antarmuka dan logika sistem yang kompleks. Misi saya adalah menerjemahkan ide abstrak menjadi aplikasi digital yang fungsional, skalabel, dan estetis.
-              </p>
+              <div className="p-4 rounded-xl bg-secondary/30 border border-border">
+                <div className="text-3xl font-black text-primary">20+</div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  Projects
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
+      </Section>
 
-        {/* Stats Grid (HUD Style) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: "Years Exp.", value: "03+", icon: "⚡" },
-            { label: "Projects", value: "15+", icon: "🚀" },
-            { label: "Clients", value: "10+", icon: "🌍" },
-            { label: "Coffee/Day", value: "∞", icon: "☕" },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}
-              className="p-6 rounded-xl bg-secondary/20 border border-primary/10 text-center hover:border-primary/50 transition-colors group"
-            >
-              <div className="text-3xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">{stat.value}</div>
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
+      {/* Experience & Education Section */}
+      <Section>
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Experience */}
+          <div>
+            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
+              <Briefcase className="text-primary" /> Experience
+            </h2>
+            <div className="space-y-8 border-l-2 border-border pl-8 ml-3">
+              {[
+                {
+                  role: "Senior Frontend Developer",
+                  company: "Tech Company A",
+                  period: "2023 - Present",
+                  desc: "Memimpin pengembangan UI untuk aplikasi SaaS skala enterprise.",
+                },
+                {
+                  role: "Web Developer",
+                  company: "Digital Agency B",
+                  period: "2021 - 2023",
+                  desc: "Membangun website responsif untuk berbagai klien internasional.",
+                },
+              ].map((job, i) => (
+                <div key={i} className="relative">
+                  <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
+                  <h3 className="text-xl font-bold">{job.role}</h3>
+                  <p className="text-sm text-primary font-mono mb-2">
+                    {job.company} | {job.period}
+                  </p>
+                  <p className="text-muted-foreground">{job.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Tech Stack Modules */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Cpu className="text-primary" /> Installed Modules
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: "Frontend Core", icon: Layers, skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion"] },
-              { title: "Backend Systems", icon: Database, skills: ["Node.js", "PostgreSQL", "Prisma", "Supabase"] },
-              { title: "Tools & Deploy", icon: Code2, skills: ["Git", "Docker", "Vercel", "Figma"] },
-            ].map((category, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.2 }}
-                className="p-6 rounded-xl border border-border bg-card/20 backdrop-blur-sm hover:bg-card/40 transition-all"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                    <category.icon size={20} />
-                  </div>
-                  <h3 className="font-bold">{category.title}</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <span key={skill} className="px-3 py-1 text-xs rounded-full border border-primary/20 bg-primary/5 text-primary-foreground/80">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+          {/* Education & Skills */}
+          <div>
+            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
+              <GraduationCap className="text-primary" /> Education
+            </h2>
+            <div className="space-y-8 border-l-2 border-border pl-8 ml-3 mb-12">
+              <div className="relative">
+                <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background bg-blue-500" />
+                <h3 className="text-xl font-bold">Teknik Informatika</h3>
+                <p className="text-sm text-primary font-mono mb-2">
+                  Universitas XYZ | 2017 - 2021
+                </p>
+                <p className="text-muted-foreground">
+                  Fokus pada Rekayasa Perangkat Lunak dan AI.
+                </p>
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <Cpu className="text-primary" /> Core Stack
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Tailwind",
+                "Node.js",
+                "PostgreSQL",
+                "Git",
+              ].map((skill) => (
+                <span
+                  key={skill}
+                  className="px-3 py-1 bg-secondary rounded-md text-sm font-medium hover:text-primary transition-colors cursor-default"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </Section>
