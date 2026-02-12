@@ -105,67 +105,6 @@ export default function Home() {
           </motion.div>
         </Section>
 
-        <div
-          className="
-    w-full py-12 mb-24 overflow-hidden
-    border-y
-    bg-muted/40
-    border-border/40
-
-    dark:bg-black/20
-    dark:border-white/5
-    backdrop-blur-sm
-  "
-        >
-          <div className="relative flex overflow-x-hidden group">
-            <div className="animate-marquee whitespace-nowrap flex gap-16 items-center h-16">
-              {[
-                "REACT",
-                "NEXT.JS",
-                "TYPESCRIPT",
-                "TAILWIND",
-                "NODE.JS",
-                "POSTGRESQL",
-                "MYSQL",
-                "DOCKER",
-                "AWS",
-                "GRAPHQL",
-                "FIGMA",
-                "REACT",
-                "NEXT.JS",
-                "TYPESCRIPT",
-                "TAILWIND",
-                "NODE.JS",
-                "POSTGRESQL",
-                "MYSQL",
-                "DOCKER",
-                "AWS",
-                "GRAPHQL",
-                "FIGMA",
-              ].map((tech, i) => (
-                <span
-                  key={i}
-                  className="
-            text-2xl font-black uppercase tracking-widest cursor-default
-            text-foreground/40
-            transition-all duration-300
-
-            hover:text-primary hover:scale-110
-
-            dark:text-transparent
-            dark:bg-clip-text
-            dark:bg-gradient-to-b
-            dark:from-white/30
-            dark:to-white/5
-          "
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* --- FEATURES SECTION --- */}
         <Section className="mb-32">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
