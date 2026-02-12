@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Heart } from "lucide-react";
+import { Github, Linkedin, Heart, Instagram } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -55,42 +55,38 @@ export default function Footer() {
               Connect
             </h3>
             <div className="flex gap-4">
-              <a
-                href="https://github.com/wildanmukmin"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="https://github.com/WildanMukmin"
                 className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
               >
                 <Github className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/wildan-mukmin-7569422a7/"
                 className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
               >
                 <Linkedin className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              </Link>
+              <Link
+                href="https://www.instagram.com/wildan_mukmin/"
                 className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
               >
-                <Twitter className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              </a>
+                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
+              </Link>
+              <Link
+                href="https://www.instagram.com/wildanmukmin.dev/"
+                className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
+              >
+                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
+              </Link>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 justify-center">
           <p className="text-muted-foreground text-sm text-center md:text-left">
             © {new Date().getFullYear()} Wildan. All rights reserved.
-          </p>
-          <p className="text-muted-foreground text-sm flex items-center gap-2">
-            Made with <Heart className="h-4 w-4 text-primary fill-primary" />{" "}
-            using Next.js & Tailwind
           </p>
         </div>
       </div>
