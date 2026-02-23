@@ -6,7 +6,7 @@ import {
   ArrowRight,
   Github,
   Linkedin,
-  Twitter,
+  Instagram,
   Code2,
   Cpu,
   Globe,
@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -29,12 +30,10 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-5xl md:text-8xl font-black leading-[0.9] mb-6 tracking-tight">
-              Building{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600 glow-text">
-                Digital
+              I Don&apos;t Just Code <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+                I Build Digital Impact.
               </span>
-              <br />
-              <span className="text-foreground">Experiences That Matter.</span>
             </h1>
           </motion.div>
 
@@ -42,14 +41,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="
-      text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed
-      border-l-2 border-primary/40 pl-6
-    "
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed border-l-2 border-primary/40 pl-6"
           >
-            Fullstack Developer turning ideas into tangible digital products.
-            Focused on clean code, blazing-fast performance, and intuitive UI
-            that works as good as it looks.
+            Fullstack developer who turns ideas into scalable, high performance
+            digital products. Clean code, smooth UI, and systems built to
+            actually last.
           </motion.p>
 
           <motion.div
@@ -82,10 +78,20 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="flex gap-6 pt-8"
           >
-            {[Github, Linkedin, Twitter].map((Icon, i) => (
+            {[
+              { icon: Github, link: "https://github.com/WildanMukmin" },
+              {
+                icon: Linkedin,
+                link: "https://www.linkedin.com/in/wildan-mukmin-7569422a7/",
+              },
+              {
+                icon: Instagram,
+                link: "https://www.instagram.com/wildanmukmin.dev/",
+              },
+            ].map((item, i) => (
               <Link
                 key={i}
-                href="#"
+                href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
@@ -99,7 +105,7 @@ export default function Home() {
           hover:border-primary/30
         "
               >
-                <Icon className="h-5 w-5" />
+                <item.icon className="h-5 w-5" />
               </Link>
             ))}
           </motion.div>
@@ -187,41 +193,88 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {[1, 2].map((item, i) => (
+            {[
+              {
+                title: "Zoom Monitoring System",
+                subtitle: "PLN UID Lampung",
+                description:
+                  "Internal web-based system for monitoring Zoom meetings, attendance tracking, and session analytics across departments.",
+                image: "/projects/zoom-pln.jpg",
+                tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
+                link: "https://monitoring-zoom-pln.vercel.app/",
+                label: "ENTERPRISE",
+              },
+              {
+                title: "RMS Coffee Website",
+                subtitle: "Company Profile & Information System",
+                description:
+                  "Modern company profile website showcasing brand identity, product catalog, and digital presence optimization.",
+                image: "/projects/rms-coffee.jpg",
+                tech: ["Next.js", "Tailwind"],
+                link: "https://www.rmscoffee.com/profile",
+                label: "BUSINESS",
+              },
+            ].map((project, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="group relative rounded-2xl bg-card border border-border overflow-hidden hover:border-primary/50 transition-all"
+                transition={{ delay: i * 0.2 }}
+                className="group relative rounded-2xl bg-card border border-border overflow-hidden hover:border-primary/50 transition-all hover:-translate-y-2"
               >
-                <div className="aspect-video bg-secondary/50 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-primary/20 mix-blend-overlay group-hover:opacity-0 transition-opacity" />
-                  <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 text-6xl font-black">
-                    PROJECT_0{item}
+                {/* Image Section */}
+                <Link href={project.link}>
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+
+                    {/* Label */}
+                    <span className="absolute top-4 left-4 text-xs font-mono px-3 py-1 rounded-full bg-primary/80 text-white tracking-widest">
+                      {project.label}
+                    </span>
                   </div>
-                </div>
+                </Link>
+
+                {/* Content */}
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h3 className="text-2xl font-bold mb-1">
-                        Cyber Dashboard
+                        {project.title}
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                        Analytics & Monitoring
+                        {project.subtitle}
                       </p>
                     </div>
-                    <div className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                      <ExternalLink size={20} />
-                    </div>
+
+                    <Link href={project.link}>
+                      <div className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer">
+                        <ExternalLink size={20} />
+                      </div>
+                    </Link>
                   </div>
-                  <div className="flex gap-2">
-                    <span className="px-2 py-1 text-xs font-mono rounded bg-primary/10 text-primary">
-                      NEXT.JS
-                    </span>
-                    <span className="px-2 py-1 text-xs font-mono rounded bg-secondary text-secondary-foreground">
-                      TAILWIND
-                    </span>
+
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 text-xs font-mono rounded bg-primary/10 text-primary"
+                      >
+                        {tech.toUpperCase()}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </motion.div>
@@ -259,7 +312,7 @@ export default function Home() {
                 step: "03",
                 title: "Deployment",
                 icon: Layers,
-                desc: "Production launch with CI/CD pipelines optimization.",
+                desc: "Production launch",
               },
             ].map((item, i) => (
               <motion.div

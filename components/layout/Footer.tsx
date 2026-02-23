@@ -20,8 +20,9 @@ export default function Footer() {
               <span className="text-primary">Fullstack Web Developer</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Building modern web experiences with passion and precision.
-              Let&apos;s create something amazing together.
+              Fullstack developer who turns ideas into scalable, high
+              performance digital products. Clean code, smooth UI, and systems
+              built to actually last.
             </p>
           </div>
 
