@@ -100,6 +100,12 @@ export default function AboutPage() {
                   desc: "Worked on a Chrome extension project, which involved creating and maintaining a Chrome extension that provides useful features and functionality for users.",
                 },
                 {
+                  role: "Intern - Information System and Technology Division (STI)",
+                  company: "PT PLN UID Lampung (Persero)",
+                  period: "12/2025 - 2/2026",
+                  desc: "Completed an internship in the Information System and Technology (STI) division. Assisted in system monitoring, data processing, and feature improvements to enhance operational efficiency across departments.",
+                },
+                {
                   role: "Assistant Lecturer for Basic Programming Course",
                   company: "Computer Science, Universitas Lampung",
                   period: "8/2024 - 12/2024",
