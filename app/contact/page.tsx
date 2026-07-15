@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import Section from "@/components/shared/Section";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, MapPin, Send } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ContactPage() {
   const [name, setName] = useState("");

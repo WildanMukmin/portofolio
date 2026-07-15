@@ -2,12 +2,33 @@
 
 import Section from "@/components/shared/Section";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, FolderOpen } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const projects = [
+  {
+    title: "My KKN Unila",
+    subtitle: "System for KKN Unila Students",
+    description:
+      "Web-based system for managing KKN (Kuliah Kerja Nyata) student data, including registration, group assignments, and progress tracking.",
+    image: "/projects/my-kkn-unila.png",
+    tech: ["Next.js", "Tailwind", "Node.js", "Laravel", "MySQL"],
+    link: "#",
+    github: "#",
+    label: "EDUCATION",
+  },
+  {
+    title: "Khalid Dzikri Courese",
+    subtitle: "Coure System & Learning Management System",
+    description:
+      "Web-based course management system for online learning, course enrollment, and content delivery.",
+    image: "/projects/khalid-dzikri-course.png",
+    tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
+    link: "https://www.khalidzikricourse.my.id/",
+    github: "#",
+    label: "EDUCATION",
+  },
   {
     title: "Zoom Monitoring System",
     subtitle: "PLN UID Lampung",
@@ -136,7 +157,7 @@ export default function PortfolioPage() {
 
             <h1 className="text-5xl md:text-7xl font-black leading-[0.9] mb-6">
               Project{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-600">
                 Archives
               </span>
             </h1>
@@ -171,7 +192,7 @@ export default function PortfolioPage() {
                     />
 
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
                     {/* Label */}
                     <span className="absolute top-4 left-4 text-xs font-mono px-3 py-1 rounded-full bg-primary/80 text-white tracking-widest">

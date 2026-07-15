@@ -3,12 +3,11 @@
 import Section from "@/components/shared/Section";
 import { motion } from "framer-motion";
 import {
-  User,
-  Code,
   Briefcase,
-  GraduationCap,
   Cpu,
+  GraduationCap,
   Handshake,
+  User,
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
@@ -25,7 +24,7 @@ export default function AboutPage() {
         >
           {/* Kolom Kiri: Foto / Avatar Placeholder */}
           <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+            <div className="absolute inset-0 bg-linear-to-r from-primary to-blue-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
             <div className="relative aspect-square rounded-2xl bg-card border border-border overflow-hidden flex items-center justify-center">
               <Image
                 src="/wildan.png"
@@ -155,7 +154,7 @@ export default function AboutPage() {
                 },
               ].map((job, i) => (
                 <div key={i} className="relative">
-                  <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
+                  <span className="absolute -left-10.25 top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
                   <h3 className="text-xl font-bold">{job.role}</h3>
                   <p className="text-sm text-primary font-mono mb-2">
                     {job.company} | {job.period}
@@ -200,7 +199,7 @@ export default function AboutPage() {
                   },
                 ].map((job, i) => (
                   <div key={i} className="relative">
-                    <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
+                    <span className="absolute -left-10.25 top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
                     <h3 className="text-xl font-bold">{job.role}</h3>
                     <p className="text-sm text-primary font-mono mb-2">
                       {job.company} | {job.period}
@@ -233,7 +232,7 @@ export default function AboutPage() {
                   },
                 ].map((job, i) => (
                   <div key={i} className="relative">
-                    <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
+                    <span className="absolute -left-10.25 top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
                     <h3 className="text-xl font-bold">{job.role}</h3>
                     <p className="text-sm text-primary font-mono mb-2">
                       {job.company} | {job.period}

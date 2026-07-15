@@ -1,23 +1,23 @@
 "use client";
 
 import Section from "@/components/shared/Section";
-import Link from "next/link";
-import {
-  ArrowRight,
-  Github,
-  Linkedin,
-  Instagram,
-  Code2,
-  Cpu,
-  Globe,
-  Zap,
-  ExternalLink,
-  Layers,
-  Terminal,
-} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Code2,
+  Cpu,
+  ExternalLink,
+  Github,
+  Globe,
+  Instagram,
+  Layers,
+  Linkedin,
+  Terminal,
+  Zap,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -31,7 +31,7 @@ export default function Home() {
           >
             <h1 className="text-5xl md:text-8xl font-black leading-[0.9] mb-6 tracking-tight">
               I Don&apos;t Just Code <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-600">
                 I Build Digital Impact.
               </span>
             </h1>
@@ -148,7 +148,7 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-2 ${
                   feature.highlight
-                    ? "bg-gradient-to-br from-primary to-blue-700 text-white border-primary shadow-lg shadow-primary/25"
+                    ? "bg-linear-to-br from-primary to-blue-700 text-white border-primary shadow-lg shadow-primary/25"
                     : "bg-card/50 backdrop-blur-md border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 dark:glow-box"
                 }`}
               >
@@ -179,7 +179,7 @@ export default function Home() {
               </span>
               <h2 className="text-4xl md:text-5xl font-black">
                 Deployed{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-600">
                   Units
                 </span>
               </h2>
@@ -195,24 +195,26 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
+                title: "Khalid Dzikri Courese",
+                subtitle: "Coure System & Learning Management System",
+                description:
+                  "Web-based course management system for online learning, course enrollment, and content delivery.",
+                image: "/projects/khalid-dzikri-course.png",
+                tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
+                link: "https://www.khalidzikricourse.my.id/",
+                github: "#",
+                label: "EDUCATION",
+              },
+              {
                 title: "Zoom Monitoring System",
                 subtitle: "PLN UID Lampung",
                 description:
-                  "Internal web-based system for monitoring Zoom meetings, attendance tracking, and session analytics across departments.",
+                  "Internal web-based system for monitoring Zoom meetings, attendance tracking, and analytics across departments.",
                 image: "/projects/zoom-pln.jpg",
                 tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
                 link: "https://monitoring-zoom-pln.vercel.app/",
+                github: "#",
                 label: "ENTERPRISE",
-              },
-              {
-                title: "RMS Coffee Website",
-                subtitle: "Company Profile & Information System",
-                description:
-                  "Modern company profile website showcasing brand identity, product catalog, and digital presence optimization.",
-                image: "/projects/rms-coffee.jpg",
-                tech: ["Next.js", "Tailwind"],
-                link: "https://www.rmscoffee.com/profile",
-                label: "BUSINESS",
               },
             ].map((project, i) => (
               <motion.div
@@ -234,7 +236,7 @@ export default function Home() {
                     />
 
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
                     {/* Label */}
                     <span className="absolute top-4 left-4 text-xs font-mono px-3 py-1 rounded-full bg-primary/80 text-white tracking-widest">
@@ -293,7 +295,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8 relative">
             {/* Connector Line (Desktop) */}
-            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent -z-10" />
+            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-primary/30 to-transparent -z-10" />
 
             {[
               {
@@ -323,7 +325,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative flex flex-col items-center text-center"
               >
-                <div className="w-24 h-24 rounded-2xl bg-card border border-primary/30 flex items-center justify-center mb-6 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.3)] z-10 bg-background">
+                <div className="w-24 h-24 rounded-2xl bg-card border border-primary/30 flex items-center justify-center mb-6 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.3)] z-10">
                   <item.icon className="w-10 h-10 text-primary" />
                 </div>
                 <div className="text-6xl font-black text-secondary absolute -top-4 -right-4 -z-10 opacity-50 select-none">
