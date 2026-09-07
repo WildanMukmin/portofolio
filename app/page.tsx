@@ -206,15 +206,15 @@ export default function Home() {
                 label: "EDUCATION",
               },
               {
-                title: "Zoom Monitoring System",
-                subtitle: "PLN UID Lampung",
+                title: "Wibot",
+                subtitle: "Automation Sosial Media Posting & Scheduling",
                 description:
-                  "Internal web-based system for monitoring Zoom meetings, attendance tracking, and analytics across departments.",
-                image: "/projects/zoom-pln.jpg",
-                tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
-                link: "https://monitoring-zoom-pln.vercel.app/",
+                  "Desktop application for automating social media posting and scheduling.",
+                image: "/projects/wibot.jpg",
+                tech: ["Electron", "React", "Tailwind", "Node.js", "MySQL"],
+                link: "#",
                 github: "#",
-                label: "ENTERPRISE",
+                label: "BUSINESS",
               },
             ].map((project, i) => (
               <motion.div

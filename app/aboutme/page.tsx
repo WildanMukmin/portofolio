@@ -99,6 +99,12 @@ export default function AboutPage() {
                   desc: "Worked on a Chrome extension project, which involved creating and maintaining a Chrome extension that provides useful features and functionality for users.",
                 },
                 {
+                  role: "Desktop Application Developer",
+                  company: "Freelance Projects",
+                  period: "6/2026 - present",
+                  desc: "Worked on a desktop application project, which involved developing a desktop application using modern technologies and frameworks to provide a seamless user experience.",
+                },
+                {
                   role: "Intern - Information System and Technology Division (STI)",
                   company: "PT PLN UID Lampung (Persero)",
                   period: "12/2025 - 2/2026",

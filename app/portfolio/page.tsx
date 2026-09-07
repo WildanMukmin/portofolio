@@ -19,6 +19,17 @@ const projects = [
     label: "EDUCATION",
   },
   {
+    title: "Wibot",
+    subtitle: "Automation Sosial Media Posting & Scheduling",
+    description:
+      "Desktop application for automating social media posting and scheduling.",
+    image: "/projects/wibot.jpg",
+    tech: ["Electron", "React", "Tailwind", "Node.js", "MySQL"],
+    link: "#",
+    github: "#",
+    label: "BUSINESS",
+  },
+  {
     title: "Khalid Dzikri Courese",
     subtitle: "Coure System & Learning Management System",
     description:
