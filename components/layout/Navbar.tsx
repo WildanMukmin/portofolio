@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -18,19 +18,19 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+    <header className="fixed top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="container mx-auto flex h-20 items-center justify-between px-6">
         {/* Logo */}
-        <Link
-          href="/"
-          className="text-lg lg:text-2xl font-black tracking-tight group"
-        >
+        <Link href="/" className="font-display text-lg lg:text-xl group">
           <span className="text-foreground group-hover:text-primary transition-colors">
-            Wildan Mukmin |{" "}
+            Wildan Mukmin
           </span>
-          <span className="text-primary">Fullstack Web Developer</span>
+          <span className="text-muted-foreground text-sm ml-2 hidden sm:inline">
+            — Fullstack Web Developer
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -42,7 +42,7 @@ export default function Navbar() {
                 key={item.path}
                 href={item.path}
                 className={cn(
-                  "relative text-sm font-bold uppercase tracking-wider transition-colors hover:text-primary",
+                  "relative text-sm font-medium uppercase tracking-wider transition-colors hover:text-primary",
                   isActive ? "text-primary" : "text-muted-foreground",
                 )}
               >
@@ -50,7 +50,7 @@ export default function Navbar() {
                 {isActive && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute -bottom-[29px] left-0 right-0 h-[3px] bg-primary rounded-full"
+                    className="absolute -bottom-[29px] left-0 right-0 h-px bg-primary"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -70,7 +70,7 @@ export default function Navbar() {
             className="text-foreground hover:text-primary transition-colors"
             aria-label="Toggle Menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default function Navbar() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl"
+          className="md:hidden border-t border-border bg-background"
         >
           <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
             {navItems.map((item) => {
@@ -92,7 +92,7 @@ export default function Navbar() {
                   href={item.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    "text-lg font-bold uppercase tracking-wider transition-colors py-2",
+                    "text-base font-medium uppercase tracking-wider transition-colors py-2",
                     isActive
                       ? "text-primary"
                       : "text-muted-foreground hover:text-primary",
@@ -105,6 +105,12 @@ export default function Navbar() {
           </nav>
         </motion.div>
       )}
+
+      {/* Scroll progress — a single custom-built interaction rather than a decorative one */}
+      <motion.div
+        className="h-px bg-primary origin-left"
+        style={{ scaleX: scrollYProgress }}
+      />
     </header>
   );
 }

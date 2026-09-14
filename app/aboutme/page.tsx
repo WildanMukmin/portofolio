@@ -1,13 +1,13 @@
 "use client";
 
 import Section from "@/components/shared/Section";
+import { headlineIn } from "@/lib/motion";
 import { motion } from "framer-motion";
 import {
   Briefcase,
   Cpu,
   GraduationCap,
   Handshake,
-  User,
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
@@ -17,35 +17,31 @@ export default function AboutPage() {
     <div className="container mx-auto px-6 py-12">
       <Section className="lg:mb-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial="hidden"
+          animate="show"
+          variants={headlineIn}
           className="grid md:grid-cols-2 gap-12 items-center"
         >
-          {/* Kolom Kiri: Foto / Avatar Placeholder */}
-          <div className="relative group">
-            <div className="absolute inset-0 bg-linear-to-r from-primary to-blue-600 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-            <div className="relative aspect-square rounded-2xl bg-card border border-border overflow-hidden flex items-center justify-center">
-              <Image
-                src="/wildan.png"
-                alt="Wildan Mukmin"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Kolom Kiri: Foto */}
+          <div className="relative aspect-square rounded-md border border-border overflow-hidden">
+            <Image
+              src="/wildan.png"
+              alt="Wildan Mukmin"
+              width={400}
+              height={400}
+              className="w-full h-full object-cover grayscale-[20%]"
+            />
           </div>
 
           {/* Kolom Kanan: Bio */}
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
-              <User size={14} />
+            <span className="text-primary font-medium text-sm tracking-widest uppercase mb-4 block">
               My Profile
-            </div>
-            <h1 className="text-4xl md:text-5xl font-black mb-6">
-              Wildan <span className="text-primary">Mukmin</span>
+            </span>
+            <h1 className="font-display text-4xl md:text-5xl mb-4">
+              Wildan Mukmin
             </h1>
-            <h2 className="text-xl md:text-2xl mb-6">
+            <h2 className="text-lg md:text-xl text-muted-foreground mb-6">
               Fullstack Web Developer
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
@@ -57,15 +53,15 @@ export default function AboutPage() {
               cycles.
             </p>
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-secondary/30 border border-border">
-                <div className="text-3xl font-black text-primary">3+</div>
+            <div className="grid grid-cols-2 gap-6 border-t border-border pt-6">
+              <div>
+                <div className="font-display text-3xl">3+</div>
                 <div className="text-xs uppercase tracking-wider text-muted-foreground">
                   Years Exp.
                 </div>
               </div>
-              <div className="p-4 rounded-xl bg-secondary/30 border border-border">
-                <div className="text-3xl font-black text-primary">20+</div>
+              <div>
+                <div className="font-display text-3xl">20+</div>
                 <div className="text-xs uppercase tracking-wider text-muted-foreground">
                   Projects
                 </div>
@@ -80,11 +76,11 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Experience */}
           <div>
-            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-              <Briefcase className="text-primary" />
-              Profesional Experience
+            <h2 className="font-display text-2xl mb-8 flex items-center gap-3">
+              <Briefcase className="text-muted-foreground" size={20} />
+              Professional Experience
             </h2>
-            <div className="space-y-8 border-l-2 border-border pl-8 ml-3">
+            <div className="space-y-8 border-l border-border pl-8 ml-3">
               {[
                 {
                   role: "Fullstack Web Developer",
@@ -160,12 +156,12 @@ export default function AboutPage() {
                 },
               ].map((job, i) => (
                 <div key={i} className="relative">
-                  <span className="absolute -left-10.25 top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
-                  <h3 className="text-xl font-bold">{job.role}</h3>
-                  <p className="text-sm text-primary font-mono mb-2">
-                    {job.company} | {job.period}
+                  <span className="absolute -left-9.5 top-1.5 h-2 w-2 rounded-full bg-primary" />
+                  <h3 className="text-lg font-semibold">{job.role}</h3>
+                  <p className="text-sm text-primary mb-2">
+                    {job.company} · {job.period}
                   </p>
-                  <p className="text-muted-foreground">{job.desc}</p>
+                  <p className="text-muted-foreground leading-relaxed">{job.desc}</p>
                 </div>
               ))}
             </div>
@@ -174,10 +170,10 @@ export default function AboutPage() {
           <div>
             {/* Education & Skills */}
             <div className="mb-10">
-              <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                <GraduationCap className="text-primary" /> Education
+              <h2 className="font-display text-2xl mb-8 flex items-center gap-3">
+                <GraduationCap className="text-muted-foreground" size={20} /> Education
               </h2>
-              <div className="space-y-8 border-l-2 border-border pl-8 ml-3">
+              <div className="space-y-8 border-l border-border pl-8 ml-3">
                 {[
                   {
                     role: "Bachelor's Degree of Computer Science",
@@ -205,12 +201,12 @@ export default function AboutPage() {
                   },
                 ].map((job, i) => (
                   <div key={i} className="relative">
-                    <span className="absolute -left-10.25 top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
-                    <h3 className="text-xl font-bold">{job.role}</h3>
-                    <p className="text-sm text-primary font-mono mb-2">
-                      {job.company} | {job.period}
+                    <span className="absolute -left-9.5 top-1.5 h-2 w-2 rounded-full bg-primary" />
+                    <h3 className="text-lg font-semibold">{job.role}</h3>
+                    <p className="text-sm text-primary mb-2">
+                      {job.company} · {job.period}
                     </p>
-                    <p className="text-muted-foreground">{job.desc}</p>
+                    <p className="text-muted-foreground leading-relaxed">{job.desc}</p>
                   </div>
                 ))}
               </div>
@@ -218,11 +214,11 @@ export default function AboutPage() {
 
             {/* Organizations */}
             <div className="mb-10">
-              <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-                <Handshake className="text-primary" />
+              <h2 className="font-display text-2xl mb-8 flex items-center gap-3">
+                <Handshake className="text-muted-foreground" size={20} />
                 Organizational Experience
               </h2>
-              <div className="space-y-8 border-l-2 border-border pl-8 ml-3">
+              <div className="space-y-8 border-l border-border pl-8 ml-3">
                 {[
                   {
                     role: "Members of Badan Khusus",
@@ -238,20 +234,20 @@ export default function AboutPage() {
                   },
                 ].map((job, i) => (
                   <div key={i} className="relative">
-                    <span className="absolute -left-10.25 top-1 h-5 w-5 rounded-full border-4 border-background bg-primary" />
-                    <h3 className="text-xl font-bold">{job.role}</h3>
-                    <p className="text-sm text-primary font-mono mb-2">
-                      {job.company} | {job.period}
+                    <span className="absolute -left-9.5 top-1.5 h-2 w-2 rounded-full bg-primary" />
+                    <h3 className="text-lg font-semibold">{job.role}</h3>
+                    <p className="text-sm text-primary mb-2">
+                      {job.company} · {job.period}
                     </p>
-                    <p className="text-muted-foreground">{job.desc}</p>
+                    <p className="text-muted-foreground leading-relaxed">{job.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="mb-10">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Cpu className="text-primary" /> Core Stack
+              <h2 className="font-display text-2xl mb-6 flex items-center gap-3">
+                <Cpu className="text-muted-foreground" size={20} /> Core Stack
               </h2>
               <div className="flex flex-wrap gap-2">
                 {[
@@ -269,7 +265,7 @@ export default function AboutPage() {
                 ].map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-secondary rounded-md text-sm font-medium hover:text-primary transition-colors cursor-default"
+                    className="px-3 py-1 border border-border rounded-md text-sm text-muted-foreground hover:text-primary hover:border-primary transition-colors cursor-default"
                   >
                     {skill}
                   </span>
@@ -278,8 +274,8 @@ export default function AboutPage() {
             </div>
 
             <div className="mb-10">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Wrench className="text-primary" /> Soft Skills
+              <h2 className="font-display text-2xl mb-6 flex items-center gap-3">
+                <Wrench className="text-muted-foreground" size={20} /> Soft Skills
               </h2>
               <div className="flex flex-wrap gap-2">
                 {[
@@ -293,7 +289,7 @@ export default function AboutPage() {
                 ].map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-secondary rounded-md text-sm font-medium hover:text-primary transition-colors cursor-default"
+                    className="px-3 py-1 border border-border rounded-md text-sm text-muted-foreground hover:text-primary hover:border-primary transition-colors cursor-default"
                   >
                     {skill}
                   </span>

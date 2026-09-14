@@ -2,7 +2,6 @@
 
 import Section from "@/components/shared/Section";
 import { Button } from "@/components/ui/Button";
-import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, MapPin, Send } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -38,30 +37,23 @@ ${message}
 
   return (
     <div className="container mx-auto px-6 py-12 flex flex-col items-center justify-center min-h-[80vh]">
-      <Section className="w-full max-w-5xl">
-        <div className="grid md:grid-cols-2 gap-12 bg-card/30 backdrop-blur-md border border-border rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -z-10" />
-
+      <Section variant="headline" className="w-full max-w-5xl">
+        <div className="grid md:grid-cols-2 gap-12 border border-border rounded-md p-8 md:p-12">
           {/* Left info */}
           <div className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              <h1 className="text-4xl font-black mb-4">Let&apos;s Connect</h1>
-              <p className="text-muted-foreground">
+            <div>
+              <h1 className="font-display text-4xl mb-4">Let&apos;s connect</h1>
+              <p className="text-muted-foreground leading-relaxed">
                 Interested in collaborating or have questions about a project?
-                Send me a message via this form or email directly.
+                Send a message via this form or email directly.
               </p>
-            </motion.div>
+            </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 border-t border-border pt-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-secondary rounded-lg text-primary">
-                  <Mail size={20} />
-                </div>
+                <Mail size={18} className="text-muted-foreground mt-1" />
                 <div>
-                  <h3 className="font-bold">Email</h3>
+                  <h3 className="text-sm font-semibold">Email</h3>
                   <p className="text-sm text-muted-foreground">
                     wildanmukmin26@gmail.com
                   </p>
@@ -69,11 +61,9 @@ ${message}
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-secondary rounded-lg text-primary">
-                  <MapPin size={20} />
-                </div>
+                <MapPin size={18} className="text-muted-foreground mt-1" />
                 <div>
-                  <h3 className="font-bold">Location</h3>
+                  <h3 className="text-sm font-semibold">Location</h3>
                   <p className="text-sm text-muted-foreground">
                     Indonesia (Remote Available)
                   </p>
@@ -81,29 +71,27 @@ ${message}
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-secondary rounded-lg text-primary">
-                  <Github size={20} />
-                </div>
+                <Github size={18} className="text-muted-foreground mt-1" />
                 <div>
-                  <h3 className="font-bold">Github</h3>
-                  <Link href="https://github.com/WildanMukmin">
-                    <p className="text-sm text-muted-foreground">
-                      WildanMukmin
-                    </p>
+                  <h3 className="text-sm font-semibold">GitHub</h3>
+                  <Link
+                    href="https://github.com/WildanMukmin"
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    WildanMukmin
                   </Link>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-secondary rounded-lg text-primary">
-                  <Linkedin size={20} />
-                </div>
+                <Linkedin size={18} className="text-muted-foreground mt-1" />
                 <div>
-                  <h3 className="font-bold">Linkedin</h3>
-                  <Link href="https://www.linkedin.com/in/wildan-mukmin-7569422a7/">
-                    <p className="text-sm text-muted-foreground">
-                      Wildan Mukmin
-                    </p>
+                  <h3 className="text-sm font-semibold">LinkedIn</h3>
+                  <Link
+                    href="https://www.linkedin.com/in/wildan-mukmin-7569422a7/"
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Wildan Mukmin
                   </Link>
                 </div>
               </div>
@@ -111,16 +99,11 @@ ${message}
           </div>
 
           {/* Right form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-card border border-border rounded-2xl p-6"
-          >
+          <div className="bg-card border border-border rounded-md p-6">
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase font-bold text-muted-foreground">
+                  <label className="text-xs uppercase font-medium tracking-wider text-muted-foreground">
                     Name
                   </label>
                   <input
@@ -128,13 +111,13 @@ ${message}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    className="w-full bg-background border border-border rounded-md px-4 py-3 focus:outline-none focus:border-primary transition-colors"
                     placeholder="John Doe"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs uppercase font-bold text-muted-foreground">
+                  <label className="text-xs uppercase font-medium tracking-wider text-muted-foreground">
                     Email
                   </label>
                   <input
@@ -142,14 +125,14 @@ ${message}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                    className="w-full bg-background border border-border rounded-md px-4 py-3 focus:outline-none focus:border-primary transition-colors"
                     placeholder="john@example.com"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase font-bold text-muted-foreground">
+                <label className="text-xs uppercase font-medium tracking-wider text-muted-foreground">
                   Subject
                 </label>
                 <input
@@ -157,20 +140,20 @@ ${message}
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   required
-                  className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                  className="w-full bg-background border border-border rounded-md px-4 py-3 focus:outline-none focus:border-primary transition-colors"
                   placeholder="Project Inquiry"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs uppercase font-bold text-muted-foreground">
+                <label className="text-xs uppercase font-medium tracking-wider text-muted-foreground">
                   Message
                 </label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
-                  className="w-full bg-secondary/50 border border-border rounded-lg px-4 py-3 h-32 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
+                  className="w-full bg-background border border-border rounded-md px-4 py-3 h-32 focus:outline-none focus:border-primary transition-colors resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>
@@ -178,13 +161,13 @@ ${message}
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full gap-2 font-bold disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                className="w-full gap-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
                 size="lg"
               >
                 <Send size={18} /> Send Message
               </Button>
             </form>
-          </motion.div>
+          </div>
         </div>
       </Section>
     </div>

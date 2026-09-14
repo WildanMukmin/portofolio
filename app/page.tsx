@@ -2,340 +2,314 @@
 
 import Section from "@/components/shared/Section";
 import { Button } from "@/components/ui/Button";
+import {
+  fadeIn,
+  maskReveal,
+  rowIn,
+  staggerContainer,
+  viewportOnce,
+} from "@/lib/motion";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Code2,
-  Cpu,
-  ExternalLink,
+  ArrowUpRight,
   Github,
-  Globe,
   Instagram,
-  Layers,
   Linkedin,
-  Terminal,
-  Zap,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+const features = [
+  {
+    index: "01",
+    title: "Production-first",
+    description:
+      "Ships features that hold up under real users — a university career platform, live booking systems — not proof-of-concepts.",
+  },
+  {
+    index: "02",
+    title: "Full-stack by necessity",
+    description:
+      "Comfortable across Next.js, Laravel, and PostgreSQL/MySQL — the tool is chosen for the project, not for the trend.",
+  },
+  {
+    index: "03",
+    title: "Taught it, not just used it",
+    description:
+      "Three semesters coordinating assistant lecturers for Data Structures and Database Systems at Universitas Lampung.",
+  },
+  {
+    index: "04",
+    title: "20+ shipped, real stakeholders",
+    description:
+      "Career centers, coffee shops, competition platforms — each built for an actual client or department.",
+  },
+];
+
+const selectedWorks = [
+  {
+    index: "01",
+    title: "Khalid Dzikri Course",
+    subtitle: "Course System & Learning Management System",
+    description:
+      "Web-based course management system for online learning, course enrollment, and content delivery.",
+    image: "/projects/khalid-dzikri-course.png",
+    tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
+    link: "https://www.khalidzikricourse.my.id/",
+    label: "Education",
+  },
+  {
+    index: "02",
+    title: "Wibot",
+    subtitle: "Automation for Social Media Posting & Scheduling",
+    description:
+      "Desktop application for automating social media posting and scheduling.",
+    image: "/projects/wibot.jpg",
+    tech: ["Electron", "React", "Tailwind", "Node.js", "MySQL"],
+    link: "#",
+    label: "Business",
+  },
+];
+
+const workflow = [
+  {
+    step: "01",
+    title: "Discovery",
+    desc: "System requirement analysis and data architecture planning.",
+  },
+  {
+    step: "02",
+    title: "Development",
+    desc: "Clean code writing with a modern, purpose-fit technology stack.",
+  },
+  {
+    step: "03",
+    title: "Deployment",
+    desc: "Production launch, monitored and handed off.",
+  },
+];
+
+const socials = [
+  { icon: Github, link: "https://github.com/WildanMukmin", label: "GitHub" },
+  {
+    icon: Linkedin,
+    link: "https://www.linkedin.com/in/wildan-mukmin-7569422a7/",
+    label: "LinkedIn",
+  },
+  {
+    icon: Instagram,
+    link: "https://www.instagram.com/wildanmukmin.dev/",
+    label: "Instagram",
+  },
+];
+
 export default function Home() {
   return (
-    <div className="relative overflow-hidden selection:bg-primary selection:text-black">
-      <div className="container mx-auto px-6 flex flex-col justify-center relative z-10">
-        <Section className="max-w-4xl space-y-8 pt-20 md:pt-16 min-h-[90vh] flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+    <div className="relative">
+      <div className="container mx-auto px-6">
+        {/* --- HERO --- */}
+        <Section
+          variant="headline"
+          className="max-w-4xl space-y-8 pt-20 md:pt-16 min-h-[85vh] flex flex-col justify-center"
+        >
+          <motion.span
+            variants={maskReveal}
+            initial="hidden"
+            animate="show"
+            className="text-primary font-medium text-sm tracking-widest uppercase block"
           >
-            <h1 className="text-5xl md:text-8xl font-black leading-[0.9] mb-6 tracking-tight">
-              I Don&apos;t Just Code <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-600">
-                I Build Digital Impact.
-              </span>
-            </h1>
-          </motion.div>
+            Fullstack Web Developer
+          </motion.span>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed border-l-2 border-primary/40 pl-6"
-          >
-            Fullstack developer who turns ideas into scalable, high performance
-            digital products. Clean code, smooth UI, and systems built to
-            actually last.
-          </motion.p>
+          <h1 className="font-display text-5xl md:text-7xl leading-[1.05] tracking-tight">
+            I don&apos;t just code.
+            <br />
+            <span className="italic text-muted-foreground">
+              I build digital impact.
+            </span>
+          </h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap gap-4 pt-4"
-          >
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed border-l border-border pl-6">
+            Turning ideas into scalable, high performance digital products —
+            clean code, considered UI, systems built to actually last.
+          </p>
+
+          <div className="flex flex-wrap gap-4 pt-2">
             <Link href="/portfolio">
-              <Button size="lg" className="group shadow-primary/25 shadow-lg">
+              <Button size="lg" className="group">
                 Explore Projects
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
 
             <Link href="/contact">
-              <Button
-                variant="outline"
-                size="lg"
-                className="backdrop-blur-sm bg-background/50"
-              >
+              <Button variant="outline" size="lg">
                 Let&apos;s Collaborate
               </Button>
             </Link>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex gap-6 pt-8"
-          >
-            {[
-              { icon: Github, link: "https://github.com/WildanMukmin" },
-              {
-                icon: Linkedin,
-                link: "https://www.linkedin.com/in/wildan-mukmin-7569422a7/",
-              },
-              {
-                icon: Instagram,
-                link: "https://www.instagram.com/wildanmukmin.dev/",
-              },
-            ].map((item, i) => (
-              <Link
-                key={i}
+          <div className="flex gap-3 pt-4">
+            {socials.map((item) => (
+              <motion.a
+                key={item.label}
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="
-          p-3 rounded-full
-          bg-secondary/50
-          hover:bg-primary/20
-          hover:text-primary
-          transition-all duration-300
-          hover:scale-110
-          border border-transparent
-          hover:border-primary/30
-        "
+                aria-label={item.label}
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.15 }}
+                className="h-10 w-10 rounded-md border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
               >
-                <item.icon className="h-5 w-5" />
-              </Link>
-            ))}
-          </motion.div>
-        </Section>
-
-        {/* --- FEATURES SECTION --- */}
-        <Section className="mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "High Velocity",
-                description:
-                  "Extreme performance optimization for instant load times.",
-                icon: Zap,
-              },
-              {
-                title: "Next-Gen Tech",
-                description: "Built upon the latest React & Next.js ecosystem.",
-                icon: Cpu,
-                highlight: true,
-              },
-              {
-                title: "Global Scale",
-                description:
-                  "Scalable architecture ready for international audiences.",
-                icon: Globe,
-              },
-              {
-                title: "Clean Syntax",
-                description: "Maintainable and well-documented code base.",
-                icon: Code2,
-                highlight: true,
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-2 ${
-                  feature.highlight
-                    ? "bg-linear-to-br from-primary to-blue-700 text-white border-primary shadow-lg shadow-primary/25"
-                    : "bg-card/50 backdrop-blur-md border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 dark:glow-box"
-                }`}
-              >
-                <div
-                  className={`p-3 rounded-lg w-fit mb-4 ${feature.highlight ? "bg-white/20" : "bg-primary/10 text-primary"}`}
-                >
-                  <feature.icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p
-                  className={
-                    feature.highlight ? "text-blue-50" : "text-muted-foreground"
-                  }
-                >
-                  {feature.description}
-                </p>
-              </motion.div>
+                <item.icon className="h-4 w-4" />
+              </motion.a>
             ))}
           </div>
         </Section>
 
-        {/* --- SELECTED WORKS / PROJECTS --- */}
-        <Section className="mb-32">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
-              <span className="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">
-                Portfolio Database
-              </span>
-              <h2 className="text-4xl md:text-5xl font-black">
-                Deployed{" "}
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-600">
-                  Units
+        {/* --- WHAT SETS THE WORK APART --- */}
+        <Section className="mb-8">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.1)}
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 border-t border-border pt-10"
+          >
+            {features.map((feature) => (
+              <motion.div
+                key={feature.index}
+                variants={rowIn}
+                className="flex gap-6"
+              >
+                <span className="font-display text-2xl text-muted-foreground/50 shrink-0">
+                  {feature.index}
                 </span>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Section>
+
+        {/* --- SELECTED WORKS --- */}
+        <Section className="mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 border-b border-border pb-6">
+            <div>
+              <span className="text-primary font-medium text-sm tracking-widest uppercase mb-2 block">
+                Selected Works
+              </span>
+              <h2 className="font-display text-4xl md:text-5xl">
+                Recent projects
               </h2>
             </div>
             <Link href="/portfolio">
               <Button variant="ghost" className="group">
-                View All Archives{" "}
+                View all archives
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                title: "Khalid Dzikri Courese",
-                subtitle: "Coure System & Learning Management System",
-                description:
-                  "Web-based course management system for online learning, course enrollment, and content delivery.",
-                image: "/projects/khalid-dzikri-course.png",
-                tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
-                link: "https://www.khalidzikricourse.my.id/",
-                github: "#",
-                label: "EDUCATION",
-              },
-              {
-                title: "Wibot",
-                subtitle: "Automation Sosial Media Posting & Scheduling",
-                description:
-                  "Desktop application for automating social media posting and scheduling.",
-                image: "/projects/wibot.jpg",
-                tech: ["Electron", "React", "Tailwind", "Node.js", "MySQL"],
-                link: "#",
-                github: "#",
-                label: "BUSINESS",
-              },
-            ].map((project, i) => (
+          <div className="divide-y divide-border">
+            {selectedWorks.map((project, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                className="group relative rounded-2xl bg-card border border-border overflow-hidden hover:border-primary/50 transition-all hover:-translate-y-2"
+                key={project.title}
+                initial="hidden"
+                whileInView="show"
+                viewport={viewportOnce}
+                variants={fadeIn}
+                className={`grid md:grid-cols-2 gap-8 md:gap-16 py-14 items-center ${
+                  i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
+                }`}
               >
-                {/* Image Section */}
-                <Link href={project.link}>
-                  <div className="relative aspect-video overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                <Link
+                  href={project.link}
+                  className="group relative aspect-video overflow-hidden rounded-md border border-border block"
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                  />
+                </Link>
 
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-
-                    {/* Label */}
-                    <span className="absolute top-4 left-4 text-xs font-mono px-3 py-1 rounded-full bg-primary/80 text-white tracking-widest">
+                <div>
+                  <div className="flex items-baseline gap-4 mb-3">
+                    <span className="font-display text-xl text-muted-foreground/50">
+                      {project.index}
+                    </span>
+                    <span className="text-xs uppercase tracking-widest text-muted-foreground">
                       {project.label}
                     </span>
                   </div>
-                </Link>
-
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold mb-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {project.subtitle}
-                      </p>
-                    </div>
-
-                    <Link href={project.link}>
-                      <div className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                        <ExternalLink size={20} />
-                      </div>
-                    </Link>
-                  </div>
-
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  <h3 className="font-display text-3xl mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-primary mb-4">
+                    {project.subtitle}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-5">
                     {project.description}
                   </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 text-xs font-mono rounded bg-primary/10 text-primary"
-                      >
-                        {tech.toUpperCase()}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    {project.tech.join(" · ")}
+                  </p>
+                  <Link
+                    href={project.link}
+                    className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-primary transition-colors group"
+                  >
+                    View project
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
                 </div>
               </motion.div>
             ))}
           </div>
         </Section>
 
-        {/* --- WORKFLOW / PROCESS --- */}
-        <Section className="mb-32">
-          <div className="text-center mb-16">
-            <span className="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">
+        {/* --- WORKFLOW --- */}
+        <Section className="mb-8">
+          <div className="mb-16 border-t border-border pt-10">
+            <span className="text-primary font-medium text-sm tracking-widest uppercase mb-2 block">
               Execution Protocol
             </span>
-            <h2 className="text-3xl md:text-4xl font-black">System Workflow</h2>
+            <h2 className="font-display text-3xl md:text-4xl">
+              How the work happens
+            </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            {/* Connector Line (Desktop) */}
-            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-primary/30 to-transparent -z-10" />
-
-            {[
-              {
-                step: "01",
-                title: "Discovery",
-                icon: Terminal,
-                desc: "System requirement analysis and data architecture planning.",
-              },
-              {
-                step: "02",
-                title: "Development",
-                icon: Code2,
-                desc: "Clean code writing with modern technology stack.",
-              },
-              {
-                step: "03",
-                title: "Deployment",
-                icon: Layers,
-                desc: "Production launch",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.2 }}
-                viewport={{ once: true }}
-                className="relative flex flex-col items-center text-center"
-              >
-                <div className="w-24 h-24 rounded-2xl bg-card border border-primary/30 flex items-center justify-center mb-6 shadow-[0_0_30px_-10px_hsl(var(--primary)/0.3)] z-10">
-                  <item.icon className="w-10 h-10 text-primary" />
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.12)}
+            className="grid md:grid-cols-3 gap-10"
+          >
+            {workflow.map((item) => (
+              <motion.div key={item.step} variants={rowIn}>
+                <div className="flex items-baseline gap-3 mb-4">
+                  <span className="font-display text-3xl text-muted-foreground/40">
+                    {item.step}
+                  </span>
+                  <div className="h-px flex-1 bg-border" />
                 </div>
-                <div className="text-6xl font-black text-secondary absolute -top-4 -right-4 -z-10 opacity-50 select-none">
-                  {item.step}
-                </div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground max-w-xs">{item.desc}</p>
+                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {item.desc}
+                </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Section>
       </div>
     </div>
