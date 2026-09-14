@@ -57,7 +57,7 @@ const experience = [
     desc: "Guided students in learning database concepts including relational modeling and SQL, and contributed to creating instructional materials and practical assignments to support hands-on learning.",
   },
   {
-    role: "Student Asistant",
+    role: "Student Assistant",
     company: "Winosa Mitra, Bandar Lampung",
     period: "10/2024 - 1/2025",
     desc: "I handled daily data entry tasks by accurately and efficiently inputting up to 20 articles and 8 scholarship entries per day, while also supporting the creative team through the design of visual content for both promotional and operational needs. In addition, I maintained high productivity by effectively balancing data management and design responsibilities within a 4-hour workday, five days per week.",
@@ -93,7 +93,7 @@ const education = [
     role: "Bachelor's Degree of Computer Science",
     company: "Lampung University",
     period: "8/2023 - present",
-    desc: "Cummulative GPA: 3.94/4.00",
+    desc: "Cumulative GPA: 3.94/4.00",
   },
   {
     role: "Senior High School",
@@ -131,7 +131,7 @@ const organizations = [
 ];
 
 const coreStack = [
-  "Java Script",
+  "JavaScript",
   "TypeScript",
   "React",
   "Next.js",
@@ -219,12 +219,11 @@ export default function AboutPage() {
               Fullstack Web Developer
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              I am a Computer Science undergraduate student at UNILA with
-              expertise in full-stack web development. I specialize in using
-              modern technologies such as React, Next.js, Laravel, and SQL.
-              One of my notable projects is developing a career center web
-              system independently, showcasing my ability to handle full
-              development cycles.
+              I&apos;m a Computer Science undergraduate at Lampung University
+              (UNILA), specializing in full-stack web development with React,
+              Next.js, Laravel, and SQL. One project I&apos;m proudest of is
+              a career center platform I built independently, end to
+              end — from database design to deployment.
             </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-card border border-border">

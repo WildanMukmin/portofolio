@@ -20,7 +20,7 @@ const projects = [
   },
   {
     title: "Wibot",
-    subtitle: "Automation Sosial Media Posting & Scheduling",
+    subtitle: "Automation Social Media Posting & Scheduling",
     description:
       "Desktop application for automating social media posting and scheduling.",
     image: "/projects/wibot.jpg",
@@ -29,8 +29,8 @@ const projects = [
     label: "BUSINESS",
   },
   {
-    title: "Khalid Dzikri Courese",
-    subtitle: "Coure System & Learning Management System",
+    title: "Khalid Dzikri Course",
+    subtitle: "Course System & Learning Management System",
     description:
       "Web-based course management system for online learning, course enrollment, and content delivery.",
     image: "/projects/khalid-dzikri-course.png",
@@ -148,16 +148,17 @@ export default function PortfolioPage() {
         <Section className="pt-16 pb-16 max-w-3xl">
           <motion.div variants={fadeIn} initial="hidden" animate="visible">
             <span className="text-primary font-bold text-sm tracking-widest uppercase mb-4 block">
-              Portfolio Database
+              Portfolio
             </span>
 
             <h1 className="font-display text-5xl md:text-6xl font-bold leading-[0.95] mb-6">
-              Project Archives
+              Projects I&apos;ve Built
             </h1>
 
             <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-primary pl-6">
-              Complete collection of deployed systems, digital platforms, and
-              experimental builds crafted with a modern technology stack.
+              A collection of the systems and platforms I&apos;ve designed
+              and built — from course platforms to internal tools — using a
+              modern, reliable stack.
             </p>
           </motion.div>
         </Section>

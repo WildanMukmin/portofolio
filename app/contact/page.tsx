@@ -50,14 +50,15 @@ ${message}
           <div className="space-y-8">
             <div>
               <span className="text-primary font-bold text-sm tracking-widest uppercase mb-3 block">
-                Have project in mind?
+                Have a project in mind?
               </span>
               <h1 className="font-display text-4xl font-bold mb-4">
-                Let&apos;s Connect
+                Let&apos;s Talk
               </h1>
               <p className="text-muted-foreground leading-relaxed">
-                Interested in collaborating or have questions about a
-                project? Send me a message via this form or email directly.
+                Have a project, a role, or just a question? Send a message
+                through the form below, or reach out directly through any
+                of the channels here.
               </p>
             </div>
 

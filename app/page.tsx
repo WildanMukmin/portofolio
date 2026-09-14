@@ -17,13 +17,12 @@ import {
   ArrowRight,
   ArrowUpRight,
   Code2,
-  Cpu,
   ExternalLink,
   Github,
-  Globe,
   Instagram,
   Layers,
   Linkedin,
+  MessageCircle,
   Search,
   Sparkles,
   Star,
@@ -47,24 +46,28 @@ const techStack = [
 
 const features = [
   {
-    title: "High Velocity",
-    description: "Extreme performance optimization for instant load times.",
+    title: "End-to-End Delivery",
+    description:
+      "From database design to deployment, I handle the whole build — not just the interface.",
+    icon: Layers,
+  },
+  {
+    title: "Modern, Maintainable Code",
+    description:
+      "TypeScript and clean architecture, so the codebase stays easy to extend later.",
+    icon: Code2,
+  },
+  {
+    title: "Performance-Minded",
+    description:
+      "Interfaces tuned to feel instant, on slow connections and small screens alike.",
     icon: Zap,
   },
   {
-    title: "Next-Gen Tech",
-    description: "Built upon the latest React & Next.js ecosystem.",
-    icon: Cpu,
-  },
-  {
-    title: "Global Scale",
-    description: "Scalable architecture ready for international audiences.",
-    icon: Globe,
-  },
-  {
-    title: "Clean Syntax",
-    description: "Maintainable and well-documented code base.",
-    icon: Code2,
+    title: "Clear Communication",
+    description:
+      "Regular updates in plain language — no jargon, no guessing where a project stands.",
+    icon: MessageCircle,
   },
 ];
 
@@ -254,15 +257,15 @@ export default function Home() {
             </motion.span>
 
             {/* Stage: big headline centered behind, big portrait centered in front */}
-            <div className="relative w-full max-w-4xl h-[280px] sm:h-[380px] md:h-[460px] lg:h-[540px] mt-8 mb-2 flex items-end justify-center">
+            <div className="relative w-full max-w-5xl h-[360px] sm:h-[480px] md:h-[600px] lg:h-[720px] mt-8 mb-2 flex items-end justify-center">
               <motion.h1
                 variants={headlineIn}
                 initial="hidden"
                 animate="visible"
                 className="absolute inset-0 z-0 flex flex-col items-center justify-center font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] select-none px-2"
               >
-                <span>I Don&apos;t Just Code</span>
-                <span className="text-primary">I Build Digital Impact.</span>
+                <span>I Build Products,</span>
+                <span className="text-primary">Not Just Websites.</span>
               </motion.h1>
 
               <HeroPortrait parallaxY={portraitY} />
@@ -275,9 +278,9 @@ export default function Home() {
               transition={{ delay: 0.15 }}
               className="text-lg text-muted-foreground max-w-lg leading-relaxed mb-10"
             >
-              Fullstack developer who turns ideas into scalable, high
-              performance digital products. Clean code, smooth UI, and
-              systems built to actually last.
+              Full-stack developer specializing in React, Next.js, and
+              Laravel. I design, build, and ship complete systems end to
+              end — not just prototypes.
             </motion.p>
 
             <motion.div
@@ -394,10 +397,10 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-between md:items-end mb-14 gap-6">
               <div>
                 <span className="text-primary font-bold text-sm tracking-widest uppercase mb-3 block">
-                  My creative works
+                  Selected work
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl font-bold">
-                  Elevating Ideas with Working Software
+                  A Few Things I&apos;ve Shipped
                 </h2>
               </div>
               <Link href="/portfolio">
@@ -488,7 +491,7 @@ export default function Home() {
               My process
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              My Creative Workflow
+              How I Work
             </h2>
           </motion.div>
 
@@ -526,10 +529,10 @@ export default function Home() {
             className="mb-14 max-w-xl"
           >
             <span className="text-primary font-bold text-sm tracking-widest uppercase mb-3 block">
-              Here&apos;s my skill
+              Skills &amp; tools
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Experienced Skill
+              What I Work With
             </h2>
           </motion.div>
 
@@ -596,13 +599,14 @@ export default function Home() {
                 About me
               </span>
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
-                Discover My Development Journey
+                A Little About Me
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                I am a Computer Science undergraduate at UNILA specializing in
-                full-stack web development with React, Next.js, Laravel, and
-                SQL. One of my notable projects is developing a career center
-                web system independently — end to end, from data model to
+                I&apos;m a Computer Science undergraduate at Lampung
+                University (UNILA), specializing in full-stack web
+                development with React, Next.js, Laravel, and SQL. One
+                project I&apos;m proudest of is a career center platform I
+                built independently, end to end — from database design to
                 deployment.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
@@ -647,7 +651,7 @@ export default function Home() {
               Placeholder section — replace or remove
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              My Success Stories
+              What People Say
             </h2>
             <p className="text-muted-foreground mt-3">
               No real client quotes yet, so these cards are placeholders.

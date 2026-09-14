@@ -77,7 +77,7 @@ export default function Navbar() {
           <ThemeToggle />
           <Link href="/contact">
             <Button size="sm" variant="inverse">
-              Hire Me
+              Let&apos;s Talk
             </Button>
           </Link>
         </div>
@@ -124,7 +124,7 @@ export default function Navbar() {
             })}
             <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
               <Button variant="inverse" className="w-full mt-2">
-                Hire Me
+                Let&apos;s Talk
               </Button>
             </Link>
           </nav>
