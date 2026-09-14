@@ -1,69 +1,69 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Mode — Paper + Volt */
-  --background: 0 0% 98%;
-  --foreground: 0 0% 9%;
+  /* Light Mode — Cool paper + Modern Blue */
+  --background: 210 40% 98%;
+  --foreground: 222 47% 10%;
 
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 9%;
+  --card-foreground: 222 47% 10%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 9%;
+  --popover-foreground: 222 47% 10%;
 
-  /* Volt Lime accent */
-  --primary: 83 70% 40%;
+  /* Modern electric blue accent */
+  --primary: 217 91% 55%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 93%;
-  --secondary-foreground: 0 0% 9%;
+  --secondary: 210 40% 95%;
+  --secondary-foreground: 222 47% 10%;
 
-  --muted: 0 0% 93%;
-  --muted-foreground: 0 0% 38%;
+  --muted: 210 40% 95%;
+  --muted-foreground: 215 16% 42%;
 
-  --accent: 83 70% 40%;
+  --accent: 217 91% 55%;
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 72% 48%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 0 0% 87%;
-  --input: 0 0% 87%;
-  --ring: 83 70% 40%;
+  --border: 214 32% 88%;
+  --input: 214 32% 88%;
+  --ring: 217 91% 55%;
 
   --radius: 1rem;
 }
 
 .dark {
-  /* Dark Mode — Ink + Volt */
-  --background: 0 0% 7%;
-  --foreground: 0 0% 97%;
+  /* Dark Mode — Deep Navy + Modern Blue */
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
 
-  --card: 0 0% 11%;
-  --card-foreground: 0 0% 97%;
+  --card: 222 39% 10%;
+  --card-foreground: 210 40% 98%;
 
-  --popover: 0 0% 10%;
-  --popover-foreground: 0 0% 97%;
+  --popover: 222 42% 9%;
+  --popover-foreground: 210 40% 98%;
 
-  /* Volt Lime accent */
-  --primary: 82 88% 56%;
-  --primary-foreground: 0 0% 8%;
+  /* Modern electric blue accent */
+  --primary: 217 91% 60%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 0 0% 97%;
+  --secondary: 222 30% 15%;
+  --secondary-foreground: 210 40% 98%;
 
-  --muted: 0 0% 16%;
-  --muted-foreground: 0 0% 63%;
+  --muted: 222 30% 15%;
+  --muted-foreground: 215 20% 65%;
 
-  --accent: 82 88% 56%;
-  --accent-foreground: 0 0% 8%;
+  --accent: 217 91% 60%;
+  --accent-foreground: 0 0% 100%;
 
   --destructive: 0 70% 55%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 0 0% 21%;
-  --input: 0 0% 21%;
-  --ring: 82 88% 56%;
+  --border: 222 25% 20%;
+  --input: 222 25% 20%;
+  --ring: 217 91% 60%;
 }
 
 @theme inline {

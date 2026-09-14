@@ -1,4 +1,11 @@
-import { Variants, Transition } from "framer-motion";
+import {
+  Variants,
+  Transition,
+  useScroll,
+  useTransform,
+  MotionValue,
+} from "framer-motion";
+import { RefObject } from "react";
 
 /** Shared easing curves so timing feels consistent across the site. */
 export const easeEditorial: Transition["ease"] = [0.16, 1, 0.3, 1];
@@ -61,3 +68,21 @@ export const scaleIn: Variants = {
     transition: { duration: 0.5, ease: easeEditorial },
   },
 };
+
+/**
+ * Scroll-driven parallax. Tracks `ref` moving through the viewport and
+ * returns a MotionValue that travels from -distance to +distance, so
+ * `style={{ y }}` drifts the element at a different speed than the page
+ * scroll. Use a bigger distance for background decoration, a smaller one
+ * for foreground content (photos, cards) so it stays subtle.
+ */
+export function useParallax(
+  ref: RefObject<HTMLElement | null>,
+  distance = 60,
+): MotionValue<number> {
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  return useTransform(scrollYProgress, [0, 1], [-distance, distance]);
+}

@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Section from "@/components/shared/Section";
-import { fadeIn } from "@/lib/motion";
+import { fadeIn, useParallax } from "@/lib/motion";
+import { useRef } from "react";
 
 const socials = [
   { name: "GitHub", icon: Github, link: "https://github.com/WildanMukmin" },
@@ -29,19 +30,28 @@ const navItems = [
 ];
 
 export default function Footer() {
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const glowY = useParallax(ctaRef, 50);
+
   return (
     <footer className="bg-background">
       <div className="container mx-auto px-6">
         {/* CTA block */}
         <Section className="pb-16">
           <motion.div
+            ref={ctaRef}
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             className="relative overflow-hidden rounded-3xl bg-foreground text-background px-8 py-16 md:px-16 md:py-24 text-center"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-background/30 px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-8">
+            <motion.div
+              style={{ y: glowY }}
+              aria-hidden
+              className="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] rounded-full bg-primary/25 blur-[130px] pointer-events-none -z-10"
+            />
+            <span className="relative inline-flex items-center gap-2 rounded-full border border-background/30 px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-8">
               <span className="h-2 w-2 rounded-full bg-primary" />
               Have a project in mind?
             </span>

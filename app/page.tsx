@@ -9,8 +9,10 @@ import {
   rowIn,
   scaleIn,
   staggerContainer,
+  useParallax,
 } from "@/lib/motion";
-import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { motion, MotionValue } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -30,6 +32,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useState } from "react";
 
 const techStack = [
   "React",
@@ -155,128 +158,170 @@ const testimonials = [
   },
 ];
 
+/**
+ * Hero portrait with a "text wraps around the subject" treatment: the
+ * image is floated and given `shape-outside`, so the headline/paragraph
+ * flow around its silhouette instead of a rectangular box.
+ *
+ * It looks for /wildan-cutout.png (a transparent PNG cutout) first. Until
+ * that file exists it falls back to the regular framed photo automatically
+ * — no code change needed once the cutout is added, just drop the file in.
+ */
+function HeroPortrait({ parallaxY }: { parallaxY: MotionValue<number> }) {
+  const [src, setSrc] = useState("/wildan-cutout.png");
+  const isCutout = src === "/wildan-cutout.png";
+
+  return (
+    <motion.div
+      style={{
+        y: parallaxY,
+        shapeOutside: `url(${src})`,
+        shapeImageThreshold: 0.5,
+        shapeMargin: "1.75rem",
+      }}
+      className={cn(
+        "relative mx-auto mb-8 w-[70%] max-w-[280px] sm:float-right sm:w-[45%] sm:max-w-none sm:ml-6 lg:w-[40%]",
+        !isCutout &&
+          "rounded-3xl overflow-hidden border border-border bg-card",
+      )}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        onError={() => setSrc("/wildan.png")}
+        alt="Wildan Mukmin"
+        draggable={false}
+        className="w-full h-auto select-none pointer-events-none"
+      />
+      <div className="absolute -bottom-6 -left-6 rounded-2xl bg-foreground text-background px-5 py-4 shadow-xl">
+        <div className="font-display text-3xl font-bold text-primary">
+          3+
+        </div>
+        <div className="text-xs uppercase tracking-wider text-background/70">
+          Years Experience
+        </div>
+      </div>
+      <div className="absolute -top-5 -right-5 rounded-2xl bg-primary text-primary-foreground px-4 py-3 shadow-xl rotate-3">
+        <div className="font-display text-2xl font-bold">20+</div>
+        <div className="text-[10px] uppercase tracking-wider">Projects</div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const worksRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+
+  const portraitY = useParallax(heroRef, 24);
+  const glowY1 = useParallax(heroRef, 70);
+  const glowY2 = useParallax(heroRef, 45);
+  const worksGlowY = useParallax(worksRef, 80);
+  const aboutPhotoY = useParallax(aboutRef, 30);
+
   return (
     <div className="relative overflow-hidden selection:bg-primary selection:text-primary-foreground">
       <div className="container mx-auto px-6">
         {/* ================= HERO ================= */}
-        <Section className="pt-12 pb-20 md:pt-16">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <motion.span
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-                className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8"
-              >
-                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                Available for freelance work
-              </motion.span>
-
-              <motion.h1
-                variants={headlineIn}
-                initial="hidden"
-                animate="visible"
-                className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6"
-              >
-                I Don&apos;t Just Code —{" "}
-                <span className="text-primary">I Build Digital Impact.</span>
-              </motion.h1>
-
-              <motion.p
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.15 }}
-                className="text-lg text-muted-foreground max-w-lg leading-relaxed mb-10"
-              >
-                Fullstack developer who turns ideas into scalable, high
-                performance digital products. Clean code, smooth UI, and
-                systems built to actually last.
-              </motion.p>
-
-              <motion.div
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.25 }}
-                className="flex flex-wrap items-center gap-4 mb-10"
-              >
-                <Link href="/portfolio">
-                  <Button size="lg" className="group">
-                    Explore Projects
-                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="outline" size="lg">
-                    Let&apos;s Collaborate
-                  </Button>
-                </Link>
-              </motion.div>
-
-              <motion.div
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.35 }}
-                className="flex gap-3"
-              >
-                {[
-                  { icon: Github, link: "https://github.com/WildanMukmin" },
-                  {
-                    icon: Linkedin,
-                    link: "https://www.linkedin.com/in/wildan-mukmin-7569422a7/",
-                  },
-                  {
-                    icon: Instagram,
-                    link: "https://www.instagram.com/wildanmukmin.dev/",
-                  },
-                ].map((item, i) => (
-                  <Link
-                    key={i}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="h-11 w-11 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-                  >
-                    <item.icon className="h-4 w-4" />
-                  </Link>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Portrait */}
+        <Section className="pt-12 pb-20 md:pt-16 relative">
+          <div ref={heroRef} className="relative">
+            {/* Parallax glow blobs */}
             <motion.div
-              variants={scaleIn}
+              style={{ y: glowY1 }}
+              aria-hidden
+              className="absolute -top-32 -right-16 w-[26rem] h-[26rem] rounded-full bg-primary/20 blur-[110px] pointer-events-none -z-10"
+            />
+            <motion.div
+              style={{ y: glowY2 }}
+              aria-hidden
+              className="absolute top-56 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-[100px] pointer-events-none -z-10"
+            />
+
+            <HeroPortrait parallaxY={portraitY} />
+
+            <motion.span
+              variants={fadeIn}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 0.2 }}
-              className="relative mx-auto w-full max-w-sm md:max-w-none"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8"
             >
-              <div className="relative aspect-3/4 rounded-3xl overflow-hidden bg-card border border-border">
-                <Image
-                  src="/wildan.png"
-                  alt="Wildan Mukmin"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 rounded-2xl bg-foreground text-background px-5 py-4 shadow-xl">
-                <div className="font-display text-3xl font-bold text-primary">
-                  3+
-                </div>
-                <div className="text-xs uppercase tracking-wider text-background/70">
-                  Years Experience
-                </div>
-              </div>
-              <div className="absolute -top-5 -right-5 rounded-2xl bg-primary text-primary-foreground px-4 py-3 shadow-xl rotate-3">
-                <div className="font-display text-2xl font-bold">20+</div>
-                <div className="text-[10px] uppercase tracking-wider">
-                  Projects
-                </div>
-              </div>
+              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              Available for freelance work
+            </motion.span>
+
+            <motion.h1
+              variants={headlineIn}
+              initial="hidden"
+              animate="visible"
+              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6"
+            >
+              I Don&apos;t Just Code —{" "}
+              <span className="text-primary">I Build Digital Impact.</span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.15 }}
+              className="text-lg text-muted-foreground max-w-lg leading-relaxed mb-10"
+            >
+              Fullstack developer who turns ideas into scalable, high
+              performance digital products. Clean code, smooth UI, and
+              systems built to actually last.
+            </motion.p>
+
+            <div className="clear-both" />
+
+            <motion.div
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.25 }}
+              className="flex flex-wrap items-center gap-4 mb-10"
+            >
+              <Link href="/portfolio">
+                <Button size="lg" className="group">
+                  Explore Projects
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="outline" size="lg">
+                  Let&apos;s Collaborate
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.35 }}
+              className="flex gap-3"
+            >
+              {[
+                { icon: Github, link: "https://github.com/WildanMukmin" },
+                {
+                  icon: Linkedin,
+                  link: "https://www.linkedin.com/in/wildan-mukmin-7569422a7/",
+                },
+                {
+                  icon: Instagram,
+                  link: "https://www.instagram.com/wildanmukmin.dev/",
+                },
+              ].map((item, i) => (
+                <Link
+                  key={i}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-11 w-11 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                >
+                  <item.icon className="h-4 w-4" />
+                </Link>
+              ))}
             </motion.div>
           </div>
         </Section>
@@ -332,8 +377,13 @@ export default function Home() {
       </div>
 
       {/* ================= SELECTED WORKS ================= */}
-      <div className="bg-foreground text-background">
-        <div className="container mx-auto px-6">
+      <div ref={worksRef} className="relative bg-foreground text-background overflow-hidden">
+        <motion.div
+          style={{ y: worksGlowY }}
+          aria-hidden
+          className="absolute top-0 right-0 w-[32rem] h-[32rem] rounded-full bg-primary/25 blur-[130px] pointer-events-none -z-10"
+        />
+        <div className="container mx-auto px-6 relative">
           <Section className="py-24">
             <div className="flex flex-col md:flex-row justify-between md:items-end mb-14 gap-6">
               <div>
@@ -512,8 +562,9 @@ export default function Home() {
 
         {/* ================= ABOUT TEASER ================= */}
         <Section className="py-24">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div ref={aboutRef} className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div
+              style={{ y: aboutPhotoY }}
               variants={scaleIn}
               initial="hidden"
               whileInView="visible"
@@ -521,7 +572,7 @@ export default function Home() {
               className="relative aspect-square rounded-3xl overflow-hidden bg-card border border-border order-2 md:order-1"
             >
               <Image
-                src="/wildann.jpeg"
+                src="/wildan.png"
                 alt="Wildan Mukmin"
                 fill
                 className="object-cover"
