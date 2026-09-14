@@ -1,6 +1,7 @@
 "use client";
 
 import Section from "@/components/shared/Section";
+import { fadeIn, rowIn, staggerContainer } from "@/lib/motion";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
@@ -15,7 +16,6 @@ const projects = [
     image: "/projects/my-kkn-unila.png",
     tech: ["Next.js", "Tailwind", "Node.js", "Laravel", "MySQL"],
     link: "#",
-    github: "#",
     label: "EDUCATION",
   },
   {
@@ -26,7 +26,6 @@ const projects = [
     image: "/projects/wibot.jpg",
     tech: ["Electron", "React", "Tailwind", "Node.js", "MySQL"],
     link: "#",
-    github: "#",
     label: "BUSINESS",
   },
   {
@@ -37,7 +36,6 @@ const projects = [
     image: "/projects/khalid-dzikri-course.png",
     tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
     link: "https://www.khalidzikricourse.my.id/",
-    github: "#",
     label: "EDUCATION",
   },
   {
@@ -48,7 +46,6 @@ const projects = [
     image: "/projects/zoom-pln.jpg",
     tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
     link: "https://monitoring-zoom-pln.vercel.app/",
-    github: "#",
     label: "ENTERPRISE",
   },
   {
@@ -59,7 +56,6 @@ const projects = [
     image: "/projects/rms-coffee.jpg",
     tech: ["Next.js", "Tailwind", "Framer Motion"],
     link: "https://www.rmscoffee.com/profile",
-    github: "#",
     label: "BUSINESS",
   },
   {
@@ -70,7 +66,6 @@ const projects = [
     image: "/projects/asdos-unila.jpg",
     tech: ["Next.js", "Tailwind", "Prisma", "PostgreSQL"],
     link: "https://lab.ilkom.unila.ac.id/",
-    github: "#",
     label: "EDUCATION",
   },
   {
@@ -81,7 +76,6 @@ const projects = [
     image: "/projects/ai-generator.jpg",
     tech: ["Next.js", "Node.js", "OpenAI API", "Cloud Storage"],
     link: "http://floracauna.com/",
-    github: "#",
     label: "AI PLATFORM",
   },
   {
@@ -92,7 +86,6 @@ const projects = [
     image: "/projects/css-2.jpg",
     tech: ["Next.js", "Tailwind", "Framer Motion"],
     link: "https://unilacss.com/",
-    github: "#",
     label: "EVENT",
   },
   {
@@ -103,7 +96,6 @@ const projects = [
     image: "/projects/arta-coffee.jpg",
     tech: ["Next.js", "Tailwind", "Framer Motion"],
     link: "https://artacoffee.vercel.app/",
-    github: "#",
     label: "BUSINESS",
   },
   {
@@ -114,7 +106,6 @@ const projects = [
     image: "/projects/lct-css.jpg",
     tech: ["Next.js", "Node.js", "PostgreSQL"],
     link: "#",
-    github: "#",
     label: "COMPETITION",
   },
   {
@@ -125,7 +116,6 @@ const projects = [
     image: "/projects/masterkayu.jpg",
     tech: ["Next.js", "Tailwind", "Node.js"],
     link: "#",
-    github: "#",
     label: "BUSINESS",
   },
   {
@@ -136,7 +126,6 @@ const projects = [
     image: "/projects/travesia.jpg",
     tech: ["Next.js", "Node.js", "PostgreSQL", "Midtrans"],
     link: "#",
-    github: "#",
     label: "TRAVEL",
   },
   {
@@ -147,52 +136,47 @@ const projects = [
     image: "/projects/cced-unila.jpg",
     tech: ["Next.js", "Node.js", "PostgreSQL", "Prisma"],
     link: "#",
-    github: "#",
     label: "CAREER PLATFORM",
   },
 ];
 
 export default function PortfolioPage() {
   return (
-    <div className="relative overflow-hidden selection:bg-primary selection:text-black">
+    <div className="relative overflow-hidden selection:bg-primary selection:text-primary-foreground">
       <div className="container mx-auto px-6 relative z-10">
-        {/* ===== HEADER SECTION ===== */}
-        <Section className="pt-24 pb-16 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <span className="text-primary font-mono text-sm tracking-widest uppercase mb-4 block">
+        {/* ===== HEADER ===== */}
+        <Section className="pt-16 pb-16 max-w-3xl">
+          <motion.div variants={fadeIn} initial="hidden" animate="visible">
+            <span className="text-primary font-bold text-sm tracking-widest uppercase mb-4 block">
               Portfolio Database
             </span>
 
-            <h1 className="text-5xl md:text-7xl font-black leading-[0.9] mb-6">
-              Project{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-600">
-                Archives
-              </span>
+            <h1 className="font-display text-5xl md:text-6xl font-bold leading-[0.95] mb-6">
+              Project Archives
             </h1>
 
-            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed border-l-2 border-primary/40 pl-6">
+            <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-primary pl-6">
               Complete collection of deployed systems, digital platforms, and
-              experimental builds crafted with modern technology stack.
+              experimental builds crafted with a modern technology stack.
             </p>
           </motion.div>
         </Section>
 
         {/* ===== PROJECT GRID ===== */}
-        <Section className="mb-32">
-          <div className="grid md:grid-cols-2 gap-10">
+        <Section className="mb-16">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-8"
+          >
             {projects.map((project, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group relative rounded-2xl bg-card border border-border overflow-hidden hover:border-primary/50 transition-all hover:-translate-y-2"
+                variants={rowIn}
+                className="group relative rounded-2xl bg-card border border-border overflow-hidden hover:border-primary/60 transition-colors"
               >
-                {/* IMAGE */}
                 <Link href={project.link}>
                   <div className="relative aspect-video overflow-hidden">
                     <Image
@@ -201,22 +185,17 @@ export default function PortfolioPage() {
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-
-                    {/* Label */}
-                    <span className="absolute top-4 left-4 text-xs font-mono px-3 py-1 rounded-full bg-primary/80 text-white tracking-widest">
+                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity" />
+                    <span className="absolute top-4 left-4 text-xs font-bold px-3 py-1 rounded-full bg-primary text-primary-foreground tracking-widest">
                       {project.label}
                     </span>
                   </div>
                 </Link>
 
-                {/* CONTENT */}
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-2xl font-bold mb-1">
+                      <h3 className="text-xl font-bold mb-1">
                         {project.title}
                       </h3>
                       <p className="text-sm text-muted-foreground">
@@ -225,8 +204,8 @@ export default function PortfolioPage() {
                     </div>
 
                     <Link href={project.link}>
-                      <div className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                        <ExternalLink size={20} />
+                      <div className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors">
+                        <ExternalLink size={18} />
                       </div>
                     </Link>
                   </div>
@@ -235,7 +214,7 @@ export default function PortfolioPage() {
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, index) => (
                       <span
                         key={index}
@@ -245,24 +224,10 @@ export default function PortfolioPage() {
                       </span>
                     ))}
                   </div>
-
-                  {/* <div className="flex gap-4">
-                    <Link href={project.link} className="flex-1">
-                      <Button className="w-full gap-2">
-                        <ExternalLink size={16} /> Live Demo
-                      </Button>
-                    </Link>
-
-                    <Link href={project.github}>
-                      <Button variant="outline" className="gap-2">
-                        <Github size={16} /> Code
-                      </Button>
-                    </Link>
-                  </div> */}
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Section>
       </div>
     </div>

@@ -1,93 +1,100 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin, Heart, Instagram } from "lucide-react";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import Section from "@/components/shared/Section";
+import { fadeIn } from "@/lib/motion";
+
+const socials = [
+  { name: "GitHub", icon: Github, link: "https://github.com/WildanMukmin" },
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    link: "https://www.linkedin.com/in/wildan-mukmin-7569422a7/",
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    link: "https://www.instagram.com/wildanmukmin.dev/",
+  },
+];
+
+const navItems = [
+  { name: "Home", path: "/" },
+  { name: "About me", path: "/aboutme" },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Contact", path: "/contact" },
+];
 
 export default function Footer() {
   return (
-    <footer className="border-t-2 border-border bg-card/50 backdrop-blur-md">
-      <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand Section */}
-          <div>
-            <Link
-              href="/"
-              className="text-lg lg:text-2xl font-black tracking-tight inline-block mb-4"
-            >
-              <span className="text-foreground group-hover:text-primary transition-colors">
-                Wildan Mukmin |{" "}
-              </span>
-              <span className="text-primary">Fullstack Web Developer</span>
+    <footer className="bg-background">
+      <div className="container mx-auto px-6">
+        {/* CTA block */}
+        <Section className="pb-16">
+          <motion.div
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-3xl bg-foreground text-background px-8 py-16 md:px-16 md:py-24 text-center"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full border border-background/30 px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-8">
+              <span className="h-2 w-2 rounded-full bg-primary" />
+              Have a project in mind?
+            </span>
+            <h2 className="font-display text-4xl md:text-6xl font-bold leading-[1.05] mb-10 max-w-3xl mx-auto">
+              Let&apos;s turn your idea into a product that actually ships.
+            </h2>
+            <Link href="/contact">
+              <Button size="lg" className="group">
+                Start a Conversation
+                <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Button>
             </Link>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Fullstack developer who turns ideas into scalable, high
-              performance digital products. Clean code, smooth UI, and systems
-              built to actually last.
-            </p>
-          </div>
+          </motion.div>
+        </Section>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-foreground font-bold uppercase tracking-wider mb-4 text-sm">
-              Quick Links
-            </h3>
-            <ul className="space-y-2">
-              {[
-                { name: "Home", path: "/" },
-                { name: "About", path: "/aboutme" },
-                { name: "Portfolio", path: "/portfolio" },
-                { name: "Contact", path: "/contact" },
-              ].map((item) => (
-                <li key={item.path}>
-                  <Link
-                    href={item.path}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Link bar */}
+        <div className="border-t border-border py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <Link href="/" className="font-display text-xl font-bold">
+            Wildan Mukmin.
+          </Link>
 
-          {/* Connect Section */}
-          <div>
-            <h3 className="text-foreground font-bold uppercase tracking-wider mb-4 text-sm">
-              Connect
-            </h3>
-            <div className="flex gap-4">
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {navItems.map((item) => (
               <Link
-                href="https://github.com/WildanMukmin"
-                className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
+                key={item.path}
+                href={item.path}
+                className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
               >
-                <Github className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                {item.name}
               </Link>
+            ))}
+          </nav>
+
+          <div className="flex gap-3">
+            {socials.map((item) => (
               <Link
-                href="https://www.linkedin.com/in/wildan-mukmin-7569422a7/"
-                className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
+                key={item.name}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.name}
+                className="h-10 w-10 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
               >
-                <Linkedin className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                <item.icon className="h-4 w-4" />
               </Link>
-              <Link
-                href="https://www.instagram.com/wildan_mukmin/"
-                className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
-              >
-                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              </Link>
-              <Link
-                href="https://www.instagram.com/wildanmukmin.dev/"
-                className="h-10 w-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
-              >
-                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              </Link>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 justify-center">
-          <p className="text-muted-foreground text-sm text-center md:text-left">
-            © {new Date().getFullYear()} Wildan. All rights reserved.
+        <div className="border-t border-border py-6 text-center">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Wildan Mukmin. Built with Next.js &
+            Framer Motion.
           </p>
         </div>
       </div>

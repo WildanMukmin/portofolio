@@ -1,103 +1,106 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Mode - Clean & Tech */
-  --background: 210 40% 98%;
-  --foreground: 222 47% 11%;
-  
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-  
-  /* Modern Electric Blue */
-  --primary: 217 91% 60%; 
-  --primary-foreground: 210 40% 98%;
-  
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222 47% 11%;
-  
-  --muted: 210 40% 96%;
-  --muted-foreground: 215 16% 47%;
-  
-  --accent: 217 91% 60%;
-  --accent-foreground: 210 40% 98%;
-  
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
+  /* Light Mode — Paper + Volt */
+  --background: 0 0% 98%;
+  --foreground: 0 0% 9%;
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
-  --ring: 217 91% 60%;
-  
-  --radius: 0.75rem;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 9%;
+
+  /* Volt Lime accent */
+  --primary: 83 70% 40%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 0 0% 93%;
+  --secondary-foreground: 0 0% 9%;
+
+  --muted: 0 0% 93%;
+  --muted-foreground: 0 0% 38%;
+
+  --accent: 83 70% 40%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 72% 48%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 0 0% 87%;
+  --input: 0 0% 87%;
+  --ring: 83 70% 40%;
+
+  --radius: 1rem;
 }
 
 .dark {
-  /* Dark Mode - Deep Space / Cyberpunk */
-  --background: 222 47% 11%; /* Dark Navy Blue */
-  --foreground: 210 40% 98%;
-  
-  --card: 217 33% 17%;
-  --card-foreground: 210 40% 98%;
-  
-  --popover: 222 47% 11%;
-  --popover-foreground: 210 40% 98%;
-  
-  /* Neon Cyan for Dark Mode */
-  --primary: 190 100% 50%; 
-  --primary-foreground: 222 47% 11%;
-  
-  --secondary: 217 33% 17%;
-  --secondary-foreground: 210 40% 98%;
-  
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 65%;
-  
-  --accent: 190 100% 50%;
-  --accent-foreground: 222 47% 11%;
-  
-  --destructive: 0 62% 50%;
-  --destructive-foreground: 210 40% 98%;
+  /* Dark Mode — Ink + Volt */
+  --background: 0 0% 7%;
+  --foreground: 0 0% 97%;
 
-  --border: 217 33% 20%;
-  --input: 217 33% 20%;
-  --ring: 190 100% 50%;
+  --card: 0 0% 11%;
+  --card-foreground: 0 0% 97%;
+
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 97%;
+
+  /* Volt Lime accent */
+  --primary: 82 88% 56%;
+  --primary-foreground: 0 0% 8%;
+
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 97%;
+
+  --muted: 0 0% 16%;
+  --muted-foreground: 0 0% 63%;
+
+  --accent: 82 88% 56%;
+  --accent-foreground: 0 0% 8%;
+
+  --destructive: 0 70% 55%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 0 0% 21%;
+  --input: 0 0% 21%;
+  --ring: 82 88% 56%;
 }
 
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-  
+
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
-  
+
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-  
+
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-  
+
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-  
+
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-  
+
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-  
+
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-  
+
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-archivo);
+
   --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 8px);
 }
 
 body {
@@ -121,36 +124,39 @@ body {
   @apply bg-primary;
 }
 
-/* Modern Grid Background */
-.cyber-grid {
-  background-size: 40px 40px;
-  background-image: linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
-  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-}
-
-.dark .cyber-grid {
-  background-image: linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px);
-}
-
-/* Glow Effect */
-.glow-text {
-  text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
-}
-
-.dark .glow-box {
-  box-shadow: 0 0 25px hsl(var(--primary) / 0.15);
-}
-
+/* Infinite marquee ticker */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee 20s linear infinite;
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-.dark .glow-box {
-  box-shadow: 0 0 40px -20px hsl(var(--primary) / 0.35);
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 28s linear infinite;
+}
+
+.pause-on-hover:hover .animate-marquee,
+.pause-on-hover:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+
+/* Big display headline sits flush, no extra optical spacing */
+.font-display {
+  letter-spacing: -0.02em;
 }

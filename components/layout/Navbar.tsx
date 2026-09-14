@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/aboutme" },
+  { name: "About me", path: "/aboutme" },
   { name: "Portfolio", path: "/portfolio" },
   { name: "Contact", path: "/contact" },
 ];
@@ -19,22 +20,33 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 300,
+    damping: 40,
+    restDelta: 0.001,
+  });
+
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+    <header className="fixed top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl">
+      <motion.div
+        className="absolute bottom-0 left-0 h-[2px] w-full origin-left bg-primary"
+        style={{ scaleX: progress }}
+      />
+
       <div className="container mx-auto flex h-20 items-center justify-between px-6">
         {/* Logo */}
-        <Link
-          href="/"
-          className="text-lg lg:text-2xl font-black tracking-tight group"
-        >
-          <span className="text-foreground group-hover:text-primary transition-colors">
-            Wildan Mukmin |{" "}
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-foreground text-background font-display font-bold text-sm">
+            WM
           </span>
-          <span className="text-primary">Fullstack Web Developer</span>
+          <span className="hidden sm:block font-display text-lg font-bold tracking-tight">
+            Wildan Mukmin
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden gap-8 md:flex items-center">
+        <nav className="hidden md:flex items-center gap-1 rounded-full border border-border p-1">
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (
@@ -42,35 +54,43 @@ export default function Navbar() {
                 key={item.path}
                 href={item.path}
                 className={cn(
-                  "relative text-sm font-bold uppercase tracking-wider transition-colors hover:text-primary",
-                  isActive ? "text-primary" : "text-muted-foreground",
+                  "relative px-4 py-2 text-sm font-semibold rounded-full transition-colors",
+                  isActive
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                {item.name}
                 {isActive && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-[29px] left-0 right-0 h-[3px] bg-primary rounded-full"
+                  <motion.span
+                    layoutId="navbar-pill"
+                    className="absolute inset-0 rounded-full bg-primary -z-10"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
+                {item.name}
               </Link>
             );
           })}
-          <div className="ml-4">
-            <ThemeToggle />
-          </div>
         </nav>
 
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
+          <Link href="/contact">
+            <Button size="sm" variant="inverse">
+              Hire Me
+            </Button>
+          </Link>
+        </div>
+
         {/* Mobile Menu Button */}
-        <div className="flex items-center md:hidden gap-4">
+        <div className="flex items-center md:hidden gap-3">
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-foreground hover:text-primary transition-colors"
+            className="text-foreground"
             aria-label="Toggle Menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
@@ -81,9 +101,9 @@ export default function Navbar() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl"
+          className="md:hidden border-t border-border bg-background"
         >
-          <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
+          <nav className="container mx-auto px-6 py-6 flex flex-col gap-2">
             {navItems.map((item) => {
               const isActive = pathname === item.path;
               return (
@@ -92,16 +112,21 @@ export default function Navbar() {
                   href={item.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    "text-lg font-bold uppercase tracking-wider transition-colors py-2",
+                    "text-base font-semibold py-2 px-4 rounded-full transition-colors",
                     isActive
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary",
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {item.name}
                 </Link>
               );
             })}
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+              <Button variant="inverse" className="w-full mt-2">
+                Hire Me
+              </Button>
+            </Link>
           </nav>
         </motion.div>
       )}
