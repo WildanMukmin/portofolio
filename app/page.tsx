@@ -159,9 +159,9 @@ const testimonials = [
 ];
 
 /**
- * Hero portrait with a "text wraps around the subject" treatment: the
- * image is floated and given `shape-outside`, so the headline/paragraph
- * flow around its silhouette instead of a rectangular box.
+ * Hero portrait with a "big subject in front of the headline" treatment:
+ * the cutout stands centered on top of the headline text (z-index layered),
+ * bottom-aligned in a fixed-height stage so it reads as one composition.
  *
  * It looks for /wildan-cutout.png (a transparent PNG cutout) first. Until
  * that file exists it falls back to the regular framed photo automatically
@@ -173,16 +173,11 @@ function HeroPortrait({ parallaxY }: { parallaxY: MotionValue<number> }) {
 
   return (
     <motion.div
-      style={{
-        y: parallaxY,
-        shapeOutside: `url(${src})`,
-        shapeImageThreshold: 0.5,
-        shapeMargin: "1.75rem",
-      }}
+      style={{ y: parallaxY }}
       className={cn(
-        "relative mx-auto mb-8 w-[70%] max-w-[280px] sm:float-right sm:w-[45%] sm:max-w-none sm:ml-6 lg:w-[40%]",
+        "relative z-10 h-full",
         !isCutout &&
-          "rounded-3xl overflow-hidden border border-border bg-card",
+          "w-[65%] max-w-xs rounded-3xl overflow-hidden border border-border bg-card",
       )}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -191,19 +186,26 @@ function HeroPortrait({ parallaxY }: { parallaxY: MotionValue<number> }) {
         onError={() => setSrc("/wildan.png")}
         alt="Wildan Mukmin"
         draggable={false}
-        className="w-full h-auto select-none pointer-events-none"
+        className={cn(
+          "select-none pointer-events-none",
+          isCutout
+            ? "h-full w-auto object-contain drop-shadow-2xl"
+            : "w-full h-full object-cover",
+        )}
       />
-      <div className="absolute -bottom-6 -left-6 rounded-2xl bg-foreground text-background px-5 py-4 shadow-xl">
-        <div className="font-display text-3xl font-bold text-primary">
+      <div className="absolute bottom-6 -left-6 sm:-left-12 rounded-2xl bg-foreground text-background px-4 py-3 sm:px-5 sm:py-4 shadow-xl">
+        <div className="font-display text-2xl sm:text-3xl font-bold text-primary">
           3+
         </div>
-        <div className="text-xs uppercase tracking-wider text-background/70">
+        <div className="text-[10px] sm:text-xs uppercase tracking-wider text-background/70">
           Years Experience
         </div>
       </div>
-      <div className="absolute -top-5 -right-5 rounded-2xl bg-primary text-primary-foreground px-4 py-3 shadow-xl rotate-3">
-        <div className="font-display text-2xl font-bold">20+</div>
-        <div className="text-[10px] uppercase tracking-wider">Projects</div>
+      <div className="absolute top-10 -right-4 sm:-right-10 rounded-2xl bg-primary text-primary-foreground px-3 py-2 sm:px-4 sm:py-3 shadow-xl rotate-3">
+        <div className="font-display text-xl sm:text-2xl font-bold">20+</div>
+        <div className="text-[9px] sm:text-[10px] uppercase tracking-wider">
+          Projects
+        </div>
       </div>
     </motion.div>
   );
@@ -225,40 +227,46 @@ export default function Home() {
       <div className="container mx-auto px-6">
         {/* ================= HERO ================= */}
         <Section className="pt-12 pb-20 md:pt-16 relative">
-          <div ref={heroRef} className="relative">
+          <div
+            ref={heroRef}
+            className="relative flex flex-col items-center text-center"
+          >
             {/* Parallax glow blobs */}
             <motion.div
               style={{ y: glowY1 }}
               aria-hidden
-              className="absolute -top-32 -right-16 w-[26rem] h-[26rem] rounded-full bg-primary/20 blur-[110px] pointer-events-none -z-10"
+              className="absolute -top-24 left-1/2 -translate-x-1/2 w-[38rem] h-[38rem] rounded-full bg-primary/20 blur-[130px] pointer-events-none -z-10"
             />
             <motion.div
               style={{ y: glowY2 }}
               aria-hidden
-              className="absolute top-56 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-[100px] pointer-events-none -z-10"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-primary/10 blur-[100px] pointer-events-none -z-10"
             />
-
-            <HeroPortrait parallaxY={portraitY} />
 
             <motion.span
               variants={fadeIn}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground"
             >
               <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
               Available for freelance work
             </motion.span>
 
-            <motion.h1
-              variants={headlineIn}
-              initial="hidden"
-              animate="visible"
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] mb-6"
-            >
-              I Don&apos;t Just Code —{" "}
-              <span className="text-primary">I Build Digital Impact.</span>
-            </motion.h1>
+            {/* Stage: big headline centered behind, big portrait centered in front */}
+            <div className="relative w-full max-w-4xl h-[280px] sm:h-[380px] md:h-[460px] lg:h-[540px] mt-8 mb-2 flex items-end justify-center">
+              <motion.h1
+                variants={headlineIn}
+                initial="hidden"
+                animate="visible"
+                className="absolute inset-0 z-0 flex flex-col items-center justify-center font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] select-none px-2"
+              >
+                <span>I Don&apos;t Just Code</span>
+                <span className="text-primary">I Build Digital Impact.</span>
+              </motion.h1>
+
+              <HeroPortrait parallaxY={portraitY} />
+            </div>
 
             <motion.p
               variants={fadeIn}
@@ -272,14 +280,12 @@ export default function Home() {
               systems built to actually last.
             </motion.p>
 
-            <div className="clear-both" />
-
             <motion.div
               variants={fadeIn}
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.25 }}
-              className="flex flex-wrap items-center gap-4 mb-10"
+              className="flex flex-wrap items-center justify-center gap-4 mb-10"
             >
               <Link href="/portfolio">
                 <Button size="lg" className="group">
