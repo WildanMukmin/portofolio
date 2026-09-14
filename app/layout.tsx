@@ -30,6 +30,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          {/* Site-wide backdrop: dot grid + soft glow + grain, fixed behind everything */}
+          <div
+            aria-hidden
+            className="fixed inset-0 overflow-hidden pointer-events-none"
+          >
+            <div className="absolute inset-0 site-backdrop" />
+            <div className="absolute inset-0 site-noise" />
+            <div className="absolute -top-56 left-1/2 -translate-x-1/2 w-[56rem] h-[56rem] rounded-full bg-primary/10 dark:bg-primary/20 blur-[160px]" />
+          </div>
+
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1 pt-20">{children}</main>
