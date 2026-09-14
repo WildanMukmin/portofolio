@@ -204,7 +204,7 @@ function HeroPortrait({ parallaxY }: { parallaxY: MotionValue<number> }) {
           Years Experience
         </div>
       </div>
-      <div className="absolute top-10 -right-4 sm:-right-10 rounded-2xl bg-primary text-primary-foreground px-3 py-2 sm:px-4 sm:py-3 shadow-xl rotate-3">
+      <div className="absolute top-10 -right-4 sm:-right-10 rounded-2xl bg-primary text-primary-foreground px-3 py-2 sm:px-4 sm:py-3 shadow-xl neon-glow rotate-3">
         <div className="font-display text-xl sm:text-2xl font-bold">20+</div>
         <div className="text-[9px] sm:text-[10px] uppercase tracking-wider">
           Projects
@@ -252,7 +252,7 @@ export default function Home() {
               animate="visible"
               className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground"
             >
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-primary neon-dot animate-pulse" />
               Available for freelance work
             </motion.span>
 
@@ -265,7 +265,7 @@ export default function Home() {
                 className="absolute inset-0 z-0 flex flex-col items-center justify-center font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] select-none px-2"
               >
                 <span>I Build Products,</span>
-                <span className="text-primary">Not Just Websites.</span>
+                <span className="text-primary neon-text">Not Just Websites.</span>
               </motion.h1>
 
               <HeroPortrait parallaxY={portraitY} />

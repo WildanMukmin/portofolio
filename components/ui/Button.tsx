@@ -25,7 +25,7 @@ export function Button({
         "inline-flex items-center justify-center gap-2 rounded-full font-bold tracking-tight transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
 
         variant === "default" &&
-          "bg-primary text-primary-foreground hover:brightness-95",
+          "bg-primary text-primary-foreground hover:brightness-95 neon-glow-hover",
 
         variant === "inverse" &&
           "bg-foreground text-background hover:brightness-110",

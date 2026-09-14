@@ -63,7 +63,7 @@ export default function Navbar() {
                 {isActive && (
                   <motion.span
                     layoutId="navbar-pill"
-                    className="absolute inset-0 rounded-full bg-primary -z-10"
+                    className="absolute inset-0 rounded-full bg-primary neon-glow -z-10"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
