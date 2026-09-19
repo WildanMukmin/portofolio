@@ -2,26 +2,26 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { fadeIn } from "@/lib/motion";
 import React from "react";
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  delay?: number;
 }
 
+/** Page section that fades in once as it scrolls into view. */
 export default function Section({
   children,
   className,
-  delay = 0,
   ...props
 }: SectionProps) {
   return (
-    <section className={cn("py-16 md:py-16", className)} {...props}>
+    <section className={cn("py-16 md:py-24", className)} {...props}>
       <motion.div
-        initial={{ opacity: 0, y: 0 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, delay: delay, ease: "easeOut" }}
+        variants={fadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
       >
         {children}
       </motion.div>

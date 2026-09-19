@@ -1,45 +1,58 @@
-"use client";
-
 import * as React from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface ButtonProps extends HTMLMotionProps<"button"> {
-  variant?: "default" | "outline" | "ghost" | "inverse";
-  size?: "default" | "sm" | "lg";
+type ButtonVariant = "default" | "outline" | "ghost" | "inverse";
+type ButtonSize = "default" | "sm" | "lg";
+
+interface ButtonStyleOptions {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  className?: string;
 }
+
+/**
+ * Class list for button-looking elements. Apply it directly to a `<Link>` or
+ * `<a>` for navigation: nesting a `<button>` inside a link is invalid HTML
+ * and gives keyboard users two tab stops per control.
+ */
+export function buttonClasses({
+  variant = "default",
+  size = "default",
+  className,
+}: ButtonStyleOptions = {}) {
+  return cn(
+    "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors duration-150 active:translate-y-px disabled:pointer-events-none disabled:opacity-50",
+
+    variant === "default" &&
+      "bg-primary text-primary-foreground hover:bg-primary/90",
+    variant === "inverse" &&
+      "bg-foreground text-background hover:bg-foreground/90",
+    variant === "outline" &&
+      "border border-input bg-transparent text-foreground hover:border-link hover:text-link",
+    variant === "ghost" && "text-foreground hover:text-link",
+
+    size === "default" && "h-11 px-5 text-sm",
+    size === "sm" && "h-10 px-4 text-sm",
+    size === "lg" && "h-12 px-6 text-base",
+    className,
+  );
+}
+
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Omit<ButtonStyleOptions, "className"> {}
 
 export function Button({
   className,
-  variant = "default",
-  size = "default",
+  variant,
+  size,
+  type = "button",
   ...props
 }: ButtonProps) {
   return (
-    <motion.button
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className={cn(
-        // Base — bold pill shape, like the reference's "Hire Me" buttons
-        "inline-flex items-center justify-center gap-2 rounded-full font-bold tracking-tight transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
-
-        variant === "default" &&
-          "bg-primary text-primary-foreground hover:brightness-95 neon-glow-hover",
-
-        variant === "inverse" &&
-          "bg-foreground text-background hover:brightness-110",
-
-        variant === "outline" &&
-          "border border-border bg-transparent text-foreground hover:border-primary hover:text-primary",
-
-        variant === "ghost" && "text-foreground hover:text-primary",
-
-        size === "default" && "h-12 px-6 text-sm",
-        size === "sm" && "h-9 px-4 text-xs",
-        size === "lg" && "h-14 px-8 text-base",
-        className,
-      )}
+    <button
+      type={type}
+      className={buttonClasses({ variant, size, className })}
       {...props}
     />
   );

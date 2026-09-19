@@ -2,133 +2,129 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-
-const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About me", path: "/aboutme" },
-  { name: "Portfolio", path: "/portfolio" },
-  { name: "Contact", path: "/contact" },
-];
+import { useEffect, useRef, useState } from "react";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { cn } from "@/lib/utils";
+import { navItems, site } from "@/lib/site";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 300,
-    damping: 40,
-    restDelta: 0.001,
-  });
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl">
-      <motion.div
-        className="absolute bottom-0 left-0 h-[2px] w-full origin-left bg-primary"
-        style={{ scaleX: progress }}
-      />
-
-      <div className="container mx-auto flex h-20 items-center justify-between px-6">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-foreground text-background font-display font-bold text-sm">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
+      <div className="container mx-auto flex h-16 items-center justify-between px-6">
+        <Link
+          href="/"
+          aria-label={`${site.name}, home`}
+          className="flex h-11 min-w-11 items-center gap-3"
+        >
+          <span
+            aria-hidden
+            className="grid size-9 place-items-center rounded-md bg-foreground font-display text-sm font-bold text-background"
+          >
             WM
           </span>
-          <span className="hidden sm:block font-display text-lg font-bold tracking-tight">
-            Wildan Mukmin
+          <span
+            aria-hidden
+            className="hidden font-display text-base font-bold sm:block"
+          >
+            {site.name}
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 rounded-full border border-border p-1">
+        <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (
               <Link
                 key={item.path}
                 href={item.path}
+                aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "relative px-4 py-2 text-sm font-semibold rounded-full transition-colors",
+                  "relative flex h-16 items-center px-3 text-sm font-medium transition-colors",
                   isActive
-                    ? "text-primary-foreground"
+                    ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
+                {item.name}
                 {isActive && (
                   <motion.span
-                    layoutId="navbar-pill"
-                    className="absolute inset-0 rounded-full bg-primary neon-glow -z-10"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    layoutId="nav-indicator"
+                    aria-hidden
+                    className="absolute inset-x-3 -bottom-px h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 500, damping: 40 }}
                   />
                 )}
-                {item.name}
               </Link>
             );
           })}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
-          <Link href="/contact">
-            <Button size="sm" variant="inverse">
-              Let&apos;s Talk
-            </Button>
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="flex items-center md:hidden gap-3">
+        <div className="flex items-center gap-2">
           <ThemeToggle />
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-foreground"
-            aria-label="Toggle Menu"
+            ref={menuButtonRef}
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label="Menu"
+            className="grid size-11 place-items-center rounded-lg border border-border md:hidden"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? (
+              <X className="size-5" aria-hidden />
+            ) : (
+              <Menu className="size-5" aria-hidden />
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden border-t border-border bg-background"
+      {menuOpen && (
+        <div
+          id="mobile-menu"
+          className="border-t border-border bg-background md:hidden"
         >
-          <nav className="container mx-auto px-6 py-6 flex flex-col gap-2">
+          <nav
+            aria-label="Main"
+            className="container mx-auto flex flex-col px-6 py-2"
+          >
             {navItems.map((item) => {
               const isActive = pathname === item.path;
               return (
                 <Link
                   key={item.path}
                   href={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "text-base font-semibold py-2 px-4 rounded-full transition-colors",
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground",
+                    "flex h-12 items-center border-b border-border text-base font-medium last:border-b-0",
+                    isActive ? "text-link" : "text-foreground",
                   )}
                 >
                   {item.name}
                 </Link>
               );
             })}
-            <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-              <Button variant="inverse" className="w-full mt-2">
-                Let&apos;s Talk
-              </Button>
-            </Link>
           </nav>
-        </motion.div>
+        </div>
       )}
     </header>
   );
