@@ -13,16 +13,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "CCED Unila Career Center",
-    subtitle: "Job Portal & Career Management System",
-    description:
-      "Career center web application similar to JobStreet, featuring job listings, employer dashboards, and applicant management.",
-    image: "/projects/cced-unila.jpg",
-    tech: ["Next.js", "Node.js", "PostgreSQL", "Prisma"],
-    category: "Career platform",
-    featured: true,
-  },
-  {
     title: "Khalid Dzikri Course",
     subtitle: "Course System & Learning Management System",
     description:
@@ -51,16 +41,6 @@ export const projects: Project[] = [
     image: "/projects/my-kkn-unila.png",
     tech: ["Next.js", "Tailwind", "Node.js", "Laravel", "MySQL"],
     category: "Education",
-  },
-  {
-    title: "Zoom Monitoring System",
-    subtitle: "PLN UID Lampung",
-    description:
-      "Internal web-based system for monitoring Zoom meetings, attendance tracking, and analytics across departments.",
-    image: "/projects/zoom-pln.jpg",
-    tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
-    category: "Enterprise",
-    link: "https://monitoring-zoom-pln.vercel.app/",
   },
   {
     title: "RMS Coffee Website",
@@ -103,16 +83,6 @@ export const projects: Project[] = [
     link: "https://unilacss.com/",
   },
   {
-    title: "Arta Coffee Website",
-    subtitle: "Company Profile & Digital Branding",
-    description:
-      "Modern coffee shop company profile website showcasing products, gallery, and brand identity.",
-    image: "/projects/arta-coffee.jpg",
-    tech: ["Next.js", "Tailwind", "Framer Motion"],
-    category: "Business",
-    link: "https://artacoffee.vercel.app/",
-  },
-  {
     title: "LCT CSS Web Application",
     subtitle: "Competition Management System",
     description:
@@ -120,15 +90,6 @@ export const projects: Project[] = [
     image: "/projects/lct-css.jpg",
     tech: ["Next.js", "Node.js", "PostgreSQL"],
     category: "Competition",
-  },
-  {
-    title: "MasterKayu",
-    subtitle: "Wood & Furniture Information System",
-    description:
-      "Business website for wood supplier and furniture store with product catalog and order management features.",
-    image: "/projects/masterkayu.jpg",
-    tech: ["Next.js", "Tailwind", "Node.js"],
-    category: "Business",
   },
   {
     title: "Travesia",
