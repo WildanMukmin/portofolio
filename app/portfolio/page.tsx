@@ -48,8 +48,8 @@ export default function PortfolioPage() {
             >
               <div className="relative aspect-video overflow-hidden rounded-md border border-border bg-secondary">
                 <Image
-                  src={project.image}
-                  alt={`${project.title} screenshot`}
+                  src={project.images[0].src}
+                  alt={project.images[0].alt}
                   fill
                   sizes="(min-width: 768px) 192px, (min-width: 640px) 160px, 100vw"
                   className="object-cover object-top"

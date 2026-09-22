@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -8,28 +11,35 @@ interface ProjectFeatureProps {
   index: number;
 }
 
-/** Large project row. Image and text swap sides on every other row. */
+/**
+ * Large project row with a browsable screenshot gallery. Image and text
+ * swap sides on every other row.
+ */
 export default function ProjectFeature({
   project,
   index,
 }: ProjectFeatureProps) {
   const reversed = index % 2 === 1;
+  const [active, setActive] = useState(0);
+  const current = project.images[active];
+  const hasGallery = project.images.length > 1;
 
-  const media = (
+  const cover = (
     <div className="relative aspect-video overflow-hidden rounded-lg border border-border bg-secondary">
       <Image
-        src={project.image}
-        alt={`${project.title} screenshot`}
+        key={current.src}
+        src={current.src}
+        alt={current.alt}
         fill
         sizes="(min-width: 768px) 55vw, 100vw"
-        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        className="animate-page-in object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
       />
     </div>
   );
 
   return (
     <article className="group grid items-center gap-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-12">
-      <div className={cn("lg:col-span-7", reversed && "md:order-2")}>
+      <div className={cn("min-w-0 lg:col-span-7", reversed && "md:order-2")}>
         {project.link ? (
           <a
             href={project.link}
@@ -39,10 +49,42 @@ export default function ProjectFeature({
             aria-hidden="true"
             className="block"
           >
-            {media}
+            {cover}
           </a>
         ) : (
-          media
+          cover
+        )}
+
+        {hasGallery && (
+          <div
+            className="mt-3 flex min-w-0 gap-2 overflow-x-auto"
+            role="group"
+            aria-label={`${project.title} screenshots`}
+          >
+            {project.images.map((image, i) => (
+              <button
+                key={image.src}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-current={i === active}
+                aria-label={image.alt}
+                className={cn(
+                  "relative h-12 w-20 shrink-0 overflow-hidden rounded-md border transition-opacity",
+                  i === active
+                    ? "border-primary opacity-100"
+                    : "border-border opacity-60 hover:opacity-100",
+                )}
+              >
+                <Image
+                  src={image.src}
+                  alt=""
+                  fill
+                  sizes="80px"
+                  className="object-cover object-top"
+                />
+              </button>
+            ))}
+          </div>
         )}
       </div>
 
