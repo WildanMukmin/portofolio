@@ -8,26 +8,46 @@ import { useState } from "react";
 const fieldClasses =
   "h-11 w-full rounded-lg border border-input bg-background px-4 text-base placeholder:text-muted-foreground";
 
+type Status = "idle" | "sending" | "success" | "error";
+
 export default function ContactPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [opening, setOpening] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [company, setCompany] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setOpening(true);
-    setSubmitted(true);
+    setStatus("sending");
+    setErrorMessage("");
 
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message, company }),
+      });
 
-    setTimeout(() => setOpening(false), 2000);
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || "Something went wrong. Try again.");
+      }
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong. Try again.",
+      );
+    }
   };
 
   const copyEmail = async () => {
@@ -100,7 +120,23 @@ export default function ContactPage() {
             </dl>
           </div>
 
-          <form className="space-y-5" onSubmit={handleSubmit}>
+          <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+            <div
+              className="absolute h-0 w-0 overflow-hidden"
+              aria-hidden="true"
+            >
+              <label htmlFor="contact-company">Leave this field empty</label>
+              <input
+                id="contact-company"
+                name="company"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+              />
+            </div>
+
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="space-y-2">
                 <label htmlFor="contact-name" className="text-sm font-medium">
@@ -167,16 +203,23 @@ export default function ContactPage() {
               />
             </div>
 
-            <Button type="submit" size="lg" disabled={opening}>
-              {opening ? "Opening email app..." : "Send Message"}
+            <Button type="submit" size="lg" disabled={status === "sending"}>
+              {status === "sending" ? "Sending..." : "Send Message"}
             </Button>
 
-            <p role="status" className="text-sm text-muted-foreground">
-              {copied
-                ? "Email address copied."
-                : submitted
-                  ? `Your email app should open with the message filled in. If it does not, write to ${site.email} directly.`
-                  : "Sending opens your email app with this message filled in."}
+            <p
+              role="status"
+              className={`text-sm ${
+                status === "error" ? "text-destructive" : "text-muted-foreground"
+              }`}
+            >
+              {status === "success"
+                ? "Message sent. I will get back to you soon."
+                : status === "error"
+                  ? errorMessage
+                  : status === "sending"
+                    ? "Sending your message..."
+                    : "Sent directly from this page, no email app required."}
             </p>
           </form>
         </div>
