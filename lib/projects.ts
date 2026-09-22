@@ -46,7 +46,6 @@ export const projects: Project[] = [
     tech: ["Next.js", "Tailwind", "Node.js", "PostgreSQL"],
     category: "Education",
     link: "https://www.khalidzikricourse.my.id/",
-    featured: true,
   },
   {
     title: "Wibot",
@@ -62,7 +61,6 @@ export const projects: Project[] = [
     ]),
     tech: ["Electron", "React", "Tailwind", "Node.js", "MySQL"],
     category: "Business",
-    featured: true,
   },
   {
     title: "My KKN Unila",
@@ -89,6 +87,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "Tailwind", "Framer Motion"],
     category: "Business",
     link: "https://www.rmscoffee.com/profile",
+    featured: true,
   },
   {
     title: "Asdos & Lab Management System",
@@ -105,6 +104,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "Tailwind", "Prisma", "PostgreSQL"],
     category: "Education",
     link: "https://lab.ilkom.unila.ac.id/",
+    featured: true,
   },
   {
     title: "AI Generator Web App",
