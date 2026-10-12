@@ -1,12 +1,19 @@
 @import "tailwindcss";
 
 /*
+  Scenes that pin the page need a second column and no reduced-motion request.
+  The same query gates the JS that drives them (see lib/use-media.ts), so the
+  markup is the static layout everywhere else.
+*/
+@custom-variant pinned (@media (min-width: 1024px) and (prefers-reduced-motion: no-preference));
+
+/*
   Tokens. Dark is the home theme: midnight navy surfaces, cool white type and
   one electric-blue accent. Light is an "ice" counterpart with the same roles.
   `--primary` is a fill (buttons, indicators); `--link` is the blue used for
   text. Both pass AA on their surfaces.
 
-  Layers: grain 40, header 50, skip link 60.
+  Layers: grain 40, header 50, cursor 55, skip link 60.
 */
 :root {
   --background: 214 45% 97%;
@@ -44,6 +51,10 @@
   --grain: 0.035;
 
   --radius: 0.625rem;
+
+  /* Motion language: snap lands type and UI; glide moves whole scenes. */
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-glide: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .dark {
@@ -161,6 +172,7 @@ body {
 }
 
 .font-display-wide {
+  font-family: var(--font-archivo), sans-serif;
   font-stretch: 125%;
   letter-spacing: -0.035em;
 }
@@ -217,6 +229,15 @@ body::after {
   );
 }
 
+/* The Stack scene's light. The layer is wider than its scene and the gradient is fully transparent before the layer ends, so sliding it never shows an edge. */
+.stack-light {
+  background: radial-gradient(
+    34% 62% at 62% 45%,
+    hsl(var(--primary) / calc(var(--stage-glow) * 0.8)),
+    transparent 100%
+  );
+}
+
 /* Second glow: the closing contact statement. */
 .contact-light {
   background: radial-gradient(
@@ -242,15 +263,16 @@ body::after {
 
 /*
   Hero entrance. CSS-only, so it plays from the server-rendered HTML instead
-  of waiting for hydration. Headline lines rise out of a clip, everything
-  else fades; --i and --d are the stagger index and delay.
+  of waiting for hydration. Each word rises out of its own clip with a slight
+  rotation; --w is the word's position in the headline and sets the stagger.
+  Everything else fades in after the words have landed.
 */
-@keyframes line-rise {
+@keyframes word-rise {
   from {
-    transform: translateY(108%);
+    transform: translateY(115%) rotate(6deg);
   }
   to {
-    transform: translateY(0);
+    transform: translateY(0) rotate(0deg);
   }
 }
 
@@ -265,23 +287,23 @@ body::after {
   }
 }
 
-.hero-line > span {
-  animation: line-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--i, 0) * 110ms + 120ms);
+.hero-word > span {
+  animation: word-rise 1.05s var(--ease-snap) both;
+  animation-delay: calc(var(--w, 0) * 70ms + 150ms);
 }
 
 .hero-fade {
-  animation: soft-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: soft-in 0.8s var(--ease-snap) both;
   animation-delay: var(--d, 0ms);
 }
 
 .hero-visual {
-  animation: soft-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: soft-in 1.2s var(--ease-snap) both;
   animation-delay: 300ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-line > span,
+  .hero-word > span,
   .hero-fade,
   .hero-visual {
     animation: none;
@@ -290,7 +312,8 @@ body::after {
 
 /*
   Scroll reveal for sections. Opacity only: the fade completes over the first
-  third of the section's entry, and content already on screen at load is
+  third of the section's entry (capped at 22rem, so tall sections are not
+  dim for long), and content already on screen at load is
   simply visible. Browsers without scroll-driven animations skip it entirely.
 */
 @supports (animation-timeline: view()) {
@@ -298,8 +321,30 @@ body::after {
     .reveal {
       animation: reveal-fade linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 35%;
+      animation-range: entry 0% entry min(35%, 22rem);
     }
+  }
+}
+
+/* Rows in a timeline arrive one by one as each enters, sliding in from the left. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-row {
+      animation: row-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -309,6 +354,182 @@ body::after {
   }
   to {
     opacity: 1;
+  }
+}
+
+/*
+  Cursor ring. Position comes from motion values on the parent; size, fill and
+  label are driven by data-kind (set from pointer events, so no re-render).
+*/
+.cursor-ring {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  margin: -1rem 0 0 -1rem;
+  border: 1px solid hsl(var(--link) / 0.65);
+  border-radius: 9999px;
+  opacity: 0;
+  transition:
+    transform 0.45s var(--ease-snap),
+    background-color 0.3s,
+    opacity 0.25s,
+    border-color 0.3s;
+}
+
+.cursor-ring[data-visible="true"] {
+  opacity: 1;
+}
+
+.cursor-ring[data-kind="link"] {
+  transform: scale(1.6);
+  background-color: hsl(var(--link) / 0.12);
+}
+
+.cursor-ring[data-kind="visit"] {
+  transform: scale(2.7);
+  border-color: transparent;
+  background-color: hsl(var(--primary) / 0.92);
+}
+
+.cursor-ring-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.3rem;
+  font-weight: 600;
+  color: hsl(var(--primary-foreground));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring[data-kind="visit"] .cursor-ring-label {
+  opacity: 1;
+}
+
+/*
+  Header. Transparent over the top of a page so the hero reads edge to edge,
+  then condensing to the solid bar as the page scrolls (0 to 140px). Falls
+  back to the plain bar where scroll-driven animation is unsupported. An open
+  mobile menu always gets the solid bar.
+*/
+@property --nav-a {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0.7;
+}
+
+@property --nav-b {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+.site-header {
+  background-color: hsl(var(--background) / var(--nav-a));
+  border-bottom-color: hsl(var(--border) / var(--nav-b));
+}
+
+.site-header[data-open="true"] {
+  --nav-a: 1;
+  --nav-b: 1;
+  animation: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header {
+      animation: nav-condense linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 140px;
+    }
+  }
+}
+
+@keyframes nav-condense {
+  from {
+    --nav-a: 0;
+    --nav-b: 0;
+  }
+  to {
+    --nav-a: 0.7;
+    --nav-b: 1;
+  }
+}
+
+/*
+  Closing scene, driven by scroll with no JavaScript. The statement's words
+  rise out of clips one after another, its width axis opens from 100% to 125%
+  (md and up, where the line cannot wrap), the blue light rises from the floor,
+  and a horizon line draws across to answer the one in the hero.
+*/
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .final-word {
+      animation: final-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 7%) entry calc(60% + var(--i, 0) * 7%);
+    }
+
+    .contact-light {
+      animation: light-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 55%;
+    }
+
+    .final-horizon {
+      animation: horizon-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+
+    @media (min-width: 768px) {
+      .final-title {
+        animation: final-stretch linear both;
+        animation-timeline: view();
+        animation-range: entry 10% entry 100%;
+      }
+    }
+  }
+}
+
+@keyframes final-rise {
+  from {
+    transform: translateY(110%) rotate(4deg);
+  }
+  to {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes final-stretch {
+  from {
+    font-stretch: 100%;
+    letter-spacing: 0em;
+  }
+  to {
+    font-stretch: 125%;
+    letter-spacing: -0.035em;
+  }
+}
+
+@keyframes light-rise {
+  from {
+    opacity: 0;
+    transform: translateY(35%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes horizon-draw {
+  from {
+    transform: scaleX(0.04);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 

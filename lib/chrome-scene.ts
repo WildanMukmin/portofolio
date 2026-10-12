@@ -14,6 +14,10 @@ import {
   MeshBasicMaterial,
   PerspectiveCamera,
   PlaneGeometry,
+  Points,
+  PointsMaterial,
+  BufferAttribute,
+  BufferGeometry,
   Scene,
   Shape,
   SRGBColorSpace,
@@ -35,6 +39,13 @@ export interface ChromeSceneOptions {
   animate: boolean;
   /** Tilt toward the pointer. Pass false on touch devices. */
   pointer: boolean;
+  /**
+   * "hero": idles on its own and follows the page's scroll position.
+   * "scroll": rotation and light are driven entirely by `getProgress`.
+   */
+  mode: "hero" | "scroll";
+  /** 0 to 1 through the scene the canvas lives in. Only read in "scroll" mode. */
+  getProgress?: () => number;
   onReady: () => void;
   onLost: () => void;
 }
@@ -151,6 +162,46 @@ function buildMonogram() {
   return geometry;
 }
 
+/** A soft round dot, so the dust reads as light and not as square pixels. */
+function dotTexture() {
+  const size = 32;
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext("2d")!;
+  const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+  gradient.addColorStop(0, "rgba(255,255,255,1)");
+  gradient.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, size, size);
+  return new CanvasTexture(canvas);
+}
+
+/**
+ * Sparse dust in front of and behind the monogram. It moves at different
+ * rates than the W, so the pointer and scroll reveal real depth.
+ */
+function buildDust(count: number) {
+  const positions = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 15;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 9;
+    positions[i * 3 + 2] = Math.random() * 9 - 6;
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute("position", new BufferAttribute(positions, 3));
+  const map = dotTexture();
+  const material = new PointsMaterial({
+    map,
+    color: 0xaec2ff,
+    size: 0.11,
+    transparent: true,
+    opacity: 0.7,
+    depthWrite: false,
+    sizeAttenuation: true,
+  });
+  return { points: new Points(geometry, material), geometry, material, map };
+}
+
 const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
 const yieldToBrowser = () =>
@@ -162,7 +213,16 @@ const yieldToBrowser = () =>
  * unavailable, so the caller keeps its static poster.
  */
 export async function createChromeScene(options: ChromeSceneOptions) {
-  const { canvas, container, animate, pointer, onReady, onLost } = options;
+  const {
+    canvas,
+    container,
+    animate,
+    pointer,
+    mode,
+    getProgress,
+    onReady,
+    onLost,
+  } = options;
 
   let renderer: WebGLRenderer;
   try {
@@ -193,6 +253,9 @@ export async function createChromeScene(options: ChromeSceneOptions) {
   const pivot = new Group();
   pivot.add(mesh);
   scene.add(pivot);
+
+  const dust = buildDust(mode === "hero" ? 150 : 90);
+  scene.add(dust.points);
 
   await yieldToBrowser();
   // Compiles the shader without stalling the main thread where the browser supports it.
@@ -227,6 +290,22 @@ export async function createChromeScene(options: ChromeSceneOptions) {
   let start = performance.now();
   let last = start;
 
+  // One slow reflection sweep every few seconds: the light travels across the
+  // chrome, holds, then travels again. Anticipation, motion, rest.
+  const SWEEP_EVERY = 9;
+  const SWEEP_SECONDS = 2;
+  const SWEEP_RADIANS = 0.9;
+  const sweepAngle = (elapsed: number) => {
+    const cycle = Math.floor(elapsed / SWEEP_EVERY);
+    const t = MathUtils.clamp(
+      (elapsed % SWEEP_EVERY) / SWEEP_SECONDS,
+      0,
+      1,
+    );
+    const eased = t * t * (3 - 2 * t);
+    return (cycle + eased) * SWEEP_RADIANS;
+  };
+
   const renderFrame = (now: number) => {
     const elapsed = (now - start) / 1000;
     const dt = Math.min((now - last) / 1000, 0.1);
@@ -239,15 +318,45 @@ export async function createChromeScene(options: ChromeSceneOptions) {
     pose.x += (pointerTarget.y * 0.22 - pose.x) * follow;
     pose.y += (pointerTarget.x * 0.55 - pose.y) * follow;
 
+    // The studio lights come up with the entrance.
+    renderer.toneMappingExposure = 0.2 + 0.95 * entrance;
+
+    if (mode === "scroll") {
+      const progress = MathUtils.clamp(getProgress?.() ?? 0, 0, 1);
+      // A turn of about 90 degrees, never edge-on: the W swings to show each
+      // face while the studio light sweeps across it (envMapRotation below).
+      const swing = progress * progress * (3 - 2 * progress);
+      pivot.rotation.y =
+        MathUtils.lerp(-0.75, 0.85, swing) + pose.y * 0.5 - (1 - entrance) * 1.3;
+      pivot.rotation.x = 0.1 + Math.sin(progress * Math.PI) * 0.28 + pose.x;
+      pivot.position.y = 0;
+      pivot.scale.setScalar(0.86 + 0.14 * entrance);
+      material.envMapRotation.y = progress * Math.PI * 1.6;
+      dust.points.rotation.y = progress * 0.9;
+      dust.points.position.set(-pose.y * 0.5, pose.x * 0.4, 0);
+      renderer.render(scene, camera);
+      return;
+    }
+
     const idleY = animate ? Math.sin(elapsed * 0.35) * 0.34 : -0.34;
     const idleX = animate ? Math.sin(elapsed * 0.27) * 0.07 : 0.06;
     const scrolled = animate ? window.scrollY : 0;
+    const leave = MathUtils.clamp(scrolled / (window.innerHeight * 0.9), 0, 1);
 
     pivot.rotation.y =
       idleY + pose.y + scrolled * 0.0016 - (1 - entrance) * 1.3;
     pivot.rotation.x = idleX + pose.x;
     pivot.position.y = scrolled * 0.0009;
-    pivot.scale.setScalar(0.86 + 0.14 * entrance);
+    pivot.scale.setScalar((0.86 + 0.14 * entrance) * (1 + leave * 0.35));
+    material.envMapRotation.y = animate ? sweepAngle(elapsed) : 0.4;
+
+    // Dust sits at a different depth, so it slides against the monogram.
+    dust.points.rotation.y = animate ? elapsed * 0.025 : 0;
+    dust.points.position.set(
+      -pose.y * 0.9,
+      pose.x * 0.7 + scrolled * 0.0016,
+      0,
+    );
 
     renderer.render(scene, camera);
   };
@@ -315,6 +424,9 @@ export async function createChromeScene(options: ChromeSceneOptions) {
       window.removeEventListener("pointermove", onPointerMove);
       geometry.dispose();
       material.dispose();
+      dust.geometry.dispose();
+      dust.material.dispose();
+      dust.map.dispose();
       environment.dispose();
       renderer.dispose();
       renderer.forceContextLoss();

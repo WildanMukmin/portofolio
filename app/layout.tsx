@@ -4,6 +4,7 @@ import { Inter, Archivo, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import CursorRing from "@/components/shared/CursorRing";
 import { MotionConfig } from "framer-motion";
 
 // Inter for reading text, Archivo for headings (its width axis gives the wide,
@@ -58,7 +59,7 @@ export default function RootLayout({
         >
           <MotionConfig reducedMotion="user">
             <noscript>
-              <style>{`.spotlight-edge{clip-path:none!important}`}</style>
+              <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
             </noscript>
             <a
               href="#main"
@@ -66,9 +67,10 @@ export default function RootLayout({
             >
               Skip to content
             </a>
+            <CursorRing />
             <div className="flex min-h-screen flex-col">
               <Navbar />
-              <main id="main" className="relative isolate flex-1 pt-16">
+              <main id="main" className="relative isolate flex-1 overflow-x-clip pt-16">
                 {children}
               </main>
               <Footer />

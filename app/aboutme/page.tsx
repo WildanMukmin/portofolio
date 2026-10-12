@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PageGlow from "@/components/shared/PageGlow";
+import PageTitle from "@/components/shared/PageTitle";
 import Section from "@/components/shared/Section";
 import { buttonClasses } from "@/components/ui/Button";
 import { site, stack } from "@/lib/site";
@@ -137,7 +138,7 @@ function Entries({ items }: { items: Entry[] }) {
       {items.map((item) => (
         <li
           key={`${item.role}-${item.period}`}
-          className="grid gap-1 py-6 md:grid-cols-[11rem_1fr] md:gap-8"
+          className="reveal-row grid gap-1 py-6 md:grid-cols-[11rem_1fr] md:gap-8"
         >
           <p className="font-mono text-sm text-muted-foreground">
             {item.period}
@@ -191,9 +192,7 @@ export default function AboutPage() {
 
           <div>
             <p className="text-sm font-medium text-link">{site.role}</p>
-            <h1 className="mt-3 font-display-wide text-4xl font-extrabold md:text-6xl">
-              {site.name}
-            </h1>
+            <PageTitle className="mt-3 text-4xl md:text-6xl">{site.name}</PageTitle>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               I&apos;m a Computer Science undergraduate at Lampung University
               (UNILA), specializing in full-stack web development with React,

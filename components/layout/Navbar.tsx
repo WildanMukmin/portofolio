@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Monogram from "@/components/shared/Monogram";
+import RollText from "@/components/shared/RollText";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { navItems, site } from "@/lib/site";
@@ -28,7 +29,10 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/70 backdrop-blur-md">
+    <header
+      data-open={menuOpen}
+      className="site-header fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md"
+    >
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <Link
           href="/"
@@ -54,13 +58,13 @@ export default function Navbar() {
                   href={item.path}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "ml-3 flex h-10 items-center rounded-lg border px-4 text-sm font-semibold transition-colors",
+                    "group/roll ml-3 flex h-10 items-center rounded-lg border px-4 text-sm font-semibold transition-colors",
                     isActive
                       ? "border-link text-link"
                       : "border-input text-foreground hover:border-link hover:text-link",
                   )}
                 >
-                  {item.name}
+                  <RollText>{item.name}</RollText>
                 </Link>
               );
             }
@@ -70,13 +74,13 @@ export default function Navbar() {
                 href={item.path}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "relative flex h-16 items-center px-3 text-sm font-medium transition-colors",
+                  "group/roll relative flex h-16 items-center px-3 text-sm font-medium transition-colors",
                   isActive
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                {item.name}
+                <RollText>{item.name}</RollText>
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
