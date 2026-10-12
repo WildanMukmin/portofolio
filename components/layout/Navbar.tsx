@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import Monogram from "@/components/shared/Monogram";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { navItems, site } from "@/lib/site";
@@ -27,19 +28,14 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/70 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <Link
           href="/"
           aria-label={`${site.name}, home`}
-          className="flex h-11 min-w-11 items-center gap-3"
+          className="group/logo flex h-11 min-w-11 items-center gap-3"
         >
-          <span
-            aria-hidden
-            className="grid size-9 place-items-center rounded-md bg-foreground font-display text-sm font-bold text-background"
-          >
-            WM
-          </span>
+          <Monogram className="h-6 w-9 text-foreground transition-colors group-hover/logo:text-link" />
           <span
             aria-hidden
             className="hidden font-display text-base font-bold sm:block"
@@ -51,6 +47,23 @@ export default function Navbar() {
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {
             const isActive = pathname === item.path;
+            if (item.path === "/contact") {
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "ml-3 flex h-10 items-center rounded-lg border px-4 text-sm font-semibold transition-colors",
+                    isActive
+                      ? "border-link text-link"
+                      : "border-input text-foreground hover:border-link hover:text-link",
+                  )}
+                >
+                  {item.name}
+                </Link>
+              );
+            }
             return (
               <Link
                 key={item.path}

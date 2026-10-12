@@ -6,10 +6,14 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { MotionConfig } from "framer-motion";
 
-// Inter for reading text, Archivo for headings (heavier and tighter, so
-// headings read as a different voice), Geist Mono for dates, indexes and stack.
+// Inter for reading text, Archivo for headings (its width axis gives the wide,
+// signage-like display voice), Geist Mono for dates, indexes and stack.
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo" });
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-archivo",
+  axes: ["wdth"],
+});
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
@@ -53,6 +57,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <MotionConfig reducedMotion="user">
+            <noscript>
+              <style>{`.spotlight-edge{clip-path:none!important}`}</style>
+            </noscript>
             <a
               href="#main"
               className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"
@@ -61,7 +68,7 @@ export default function RootLayout({
             </a>
             <div className="flex min-h-screen flex-col">
               <Navbar />
-              <main id="main" className="flex-1 pt-16">
+              <main id="main" className="relative isolate flex-1 pt-16">
                 {children}
               </main>
               <Footer />

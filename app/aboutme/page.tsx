@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageGlow from "@/components/shared/PageGlow";
 import Section from "@/components/shared/Section";
 import { buttonClasses } from "@/components/ui/Button";
 import { site, stack } from "@/lib/site";
@@ -174,6 +175,7 @@ function Block({
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-6">
+      <PageGlow />
       <Section className="pb-12 pt-16 md:pb-16 md:pt-24">
         <div className="grid items-center gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16">
           <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-lg border border-border bg-card md:max-w-none">
@@ -189,7 +191,7 @@ export default function AboutPage() {
 
           <div>
             <p className="text-sm font-medium text-link">{site.role}</p>
-            <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">
+            <h1 className="mt-3 font-display-wide text-4xl font-extrabold md:text-6xl">
               {site.name}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">

@@ -1,5 +1,6 @@
 "use client";
 
+import PageGlow from "@/components/shared/PageGlow";
 import Section from "@/components/shared/Section";
 import { Button } from "@/components/ui/Button";
 import { site, socials } from "@/lib/site";
@@ -62,10 +63,11 @@ export default function ContactPage() {
 
   return (
     <div className="container mx-auto px-6">
+      <PageGlow />
       <Section className="pb-16 pt-16 md:pt-24">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div>
-            <h1 className="font-display text-4xl font-bold md:text-6xl">
+            <h1 className="font-display-wide text-5xl font-extrabold md:text-7xl">
               Contact
             </h1>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
