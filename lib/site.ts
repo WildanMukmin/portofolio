@@ -37,5 +37,5 @@ export const stack = [
     title: "Backend and data",
     items: ["Node.js", "PHP", "Laravel", "Python", "PostgreSQL", "MySQL"],
   },
-  { title: "Tools", items: ["Git"] },
+  { title: "Tools", items: ["Git", "Claude Code", "VS Code"] },
 ];
